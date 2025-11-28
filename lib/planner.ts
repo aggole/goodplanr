@@ -33,9 +33,9 @@ export async function generatePlannerPdf(options: PlannerOptions): Promise<Uint8
     const font = await doc.embedFont(robotoRegularBytes);
     const boldFont = await doc.embedFont(robotoBoldBytes);
 
-    // Page Dimensions (Landscape A4-ish)
-    const width = 842;
-    const height = 595;
+    // Page Dimensions (Custom: 1366x968 pixels)
+    const width = 1366;
+    const height = 968;
 
     const context = {
         doc,
@@ -163,7 +163,7 @@ async function generateMonthlyPages(ctx: any) {
                     width: cellWidth,
                     height: cellHeight,
                     borderColor: rgb(0.8, 0.8, 0.8),
-                    borderWidth: 1,
+                    borderWidth: 0.5,
                 });
 
                 // Draw Date
@@ -258,7 +258,7 @@ async function generateWeeklyPages(ctx: any) {
             page.drawLine({
                 start: { x, y: ctx.height - 50 },
                 end: { x, y: 50 },
-                thickness: 1,
+                thickness: 0.5,
                 color: rgb(0.8, 0.8, 0.8)
             });
 
@@ -371,7 +371,7 @@ function drawNavigationTabs(page: PDFPage, ctx: any, activeMonthIndex: number) {
             height: tabHeight,
             color: isActive ? rgb(0.2, 0.2, 0.2) : rgb(0.9, 0.9, 0.9),
             borderColor: rgb(0.5, 0.5, 0.5),
-            borderWidth: 1
+            borderWidth: 0.5
         });
 
         // Draw Label
