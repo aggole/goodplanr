@@ -1,5 +1,8 @@
 
 import { PDFDocument, PDFPage, PDFFont, rgb, StandardFonts, PDFName, PDFRef } from 'pdf-lib';
+import * as fs from 'fs';
+import * as path from 'path';
+import fontkit from 'fontkit';
 
 interface PlannerOptions {
     year: number;
@@ -16,8 +19,19 @@ interface PageLink {
 
 export async function generatePlannerPdf(options: PlannerOptions): Promise<Uint8Array> {
     const doc = await PDFDocument.create();
-    const font = await doc.embedFont(StandardFonts.Helvetica);
-    const boldFont = await doc.embedFont(StandardFonts.HelveticaBold);
+
+    // Register fontkit
+    doc.registerFontkit(fontkit);
+
+    // Load Roboto fonts
+    const robotoRegularPath = path.join(process.cwd(), 'public', 'fonts', 'Roboto-Regular.ttf');
+    const robotoBoldPath = path.join(process.cwd(), 'public', 'fonts', 'Roboto-Bold.ttf');
+
+    const robotoRegularBytes = fs.readFileSync(robotoRegularPath);
+    const robotoBoldBytes = fs.readFileSync(robotoBoldPath);
+
+    const font = await doc.embedFont(robotoRegularBytes);
+    const boldFont = await doc.embedFont(robotoBoldBytes);
 
     // Page Dimensions (Landscape A4-ish)
     const width = 842;
