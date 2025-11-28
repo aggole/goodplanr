@@ -2,7 +2,6 @@
 import { PDFDocument, PDFPage, PDFFont, rgb, StandardFonts, PDFName, PDFRef } from 'pdf-lib';
 import * as fs from 'fs';
 import * as path from 'path';
-import fontkit from 'fontkit';
 
 interface PlannerOptions {
     year: number;
@@ -20,7 +19,8 @@ interface PageLink {
 export async function generatePlannerPdf(options: PlannerOptions): Promise<Uint8Array> {
     const doc = await PDFDocument.create();
 
-    // Register fontkit
+    // Register fontkit (use require to avoid TypeScript issues)
+    const fontkit = require('fontkit');
     doc.registerFontkit(fontkit);
 
     // Load Roboto fonts
