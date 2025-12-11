@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# backups (created by backup API)
+/backups/
+
+# config (user-specific planner settings)
+/config/
