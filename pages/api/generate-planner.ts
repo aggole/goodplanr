@@ -17,17 +17,30 @@ export default async function handler(
 
     try {
         // Load the saved config for Classic planner (if exists)
-        let config = {};
-        const savedConfigPath = path.join(process.cwd(), 'saved_config.json');
+        let config: CustomPlannerOptions['config'] = {
+            monthly: [],
+            weekly: [],
+            daily: [],
+            global: []
+        };
+
+        const configDir = path.join(process.cwd(), 'config');
+        const savedConfigPath = path.join(configDir, 'classic_config.json');
         if (fs.existsSync(savedConfigPath)) {
             const savedData = JSON.parse(fs.readFileSync(savedConfigPath, 'utf8'));
-            config = savedData.placeholders || {};
+            if (savedData.placeholders) {
+                config = {
+                    ...config,
+                    ...savedData.placeholders
+                };
+            }
         }
 
         const options: CustomPlannerOptions = {
             year: parseInt(year),
             startDay: startDay || 'Monday',
             config,
+            scope: 'full',
             holidaySettings
         };
 
