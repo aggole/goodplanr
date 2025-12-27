@@ -1,6 +1,7 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { generateCustomPlannerPdf, CustomPlannerOptions } from '../../lib/planner';
+import { compressPdfWithILovePDF } from '../../utils/compress-pdf';
 import fs from 'fs';
 import path from 'path';
 
@@ -46,7 +47,23 @@ export default async function handler(
             holidaySettings
         };
 
+        console.log('=== PDF GENERATION START ===');
         const pdfBytes = await generateCustomPlannerPdf(options);
+        console.log(`PDF generated: ${(pdfBytes.length / 1024 / 1024).toFixed(2)}MB`);
+
+        // Compress PDF using iLovePDF API
+        console.log('=== COMPRESSION START ===');
+        console.log('API Key configured:', !!process.env.ILOVEPDF_PUBLIC_KEY);
+
+        let compressedBytes;
+        try {
+            compressedBytes = await compressPdfWithILovePDF(pdfBytes);
+            console.log(`PDF after compression: ${(compressedBytes.length / 1024 / 1024).toFixed(2)}MB`);
+        } catch (error) {
+            console.error('COMPRESSION ERROR:', error);
+            compressedBytes = pdfBytes;
+        }
+        console.log('=== COMPRESSION END ===');
 
         // Build filename with year, start day, and holiday country
         const startDayShort = (startDay || 'Monday') === 'Monday' ? 'Mon' : 'Sun';
@@ -55,7 +72,7 @@ export default async function handler(
 
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-        res.send(Buffer.from(pdfBytes));
+        res.send(Buffer.from(compressedBytes));
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error generating PDF' });

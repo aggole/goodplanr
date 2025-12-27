@@ -81,7 +81,7 @@ export async function generateCustomPlannerPdf(options: CustomPlannerOptions): P
     const fontkit = require('fontkit');
     doc.registerFontkit(fontkit);
 
-    // Load Fonts
+    // Load Fonts (subsetting disabled due to compatibility issues)
     const fontsDir = path.join(process.cwd(), 'public', 'fonts');
     const regularFont = await doc.embedFont(fs.readFileSync(path.join(fontsDir, 'Roboto-Regular.ttf')));
     const boldFont = await doc.embedFont(fs.readFileSync(path.join(fontsDir, 'Roboto-Bold.ttf')));
@@ -95,31 +95,51 @@ export async function generateCustomPlannerPdf(options: CustomPlannerOptions): P
         ? await doc.embedFont(fs.readFileSync(path.join(fontsDir, 'Roboto-Medium.ttf')))
         : regularFont;
 
-    // Load CJK fonts for holiday names (Japanese, Korean, Simplified/Traditional Chinese)
+    // Conditionally load CJK fonts based on country requirements
+    // This optimization prevents embedding all CJK fonts (~25-30MB) for non-CJK countries
     let notoSansJP = boldFont; // Fallback to bold
     let notoSansKR = boldFont;
     let notoSansSC = boldFont; // Simplified Chinese for China
     let notoSansTC = boldFont; // Traditional Chinese for Taiwan/HK
-    try {
-        const jpPath = path.join(fontsDir, 'NotoSansJP-Medium.ttf');
-        const krPath = path.join(fontsDir, 'NotoSansKR-Medium.ttf');
-        const scPath = path.join(fontsDir, 'NotoSansSC-Medium.ttf');
-        const tcPath = path.join(fontsDir, 'NotoSansTC-Medium.ttf');
 
-        if (fs.existsSync(jpPath)) {
-            notoSansJP = await doc.embedFont(fs.readFileSync(jpPath));
+    const countryCode = options.holidaySettings?.countryCode;
+    const cjkCountries = ['JP', 'KR', 'CN', 'TW', 'HK', 'SG', 'MO'];
+    const needsCJK = cjkCountries.includes(countryCode || '');
+
+    if (needsCJK) {
+        try {
+            // Only load the specific font(s) needed for this country
+            // Note: Subsetting disabled for CJK fonts as they may not support it
+            if (countryCode === 'JP') {
+                const jpPath = path.join(fontsDir, 'NotoSansJP-Medium.ttf');
+                if (fs.existsSync(jpPath)) {
+                    notoSansJP = await doc.embedFont(fs.readFileSync(jpPath));
+                }
+            } else if (countryCode === 'KR') {
+                const krPath = path.join(fontsDir, 'NotoSansKR-Medium.ttf');
+                if (fs.existsSync(krPath)) {
+                    notoSansKR = await doc.embedFont(fs.readFileSync(krPath));
+                }
+            } else if (countryCode === 'CN') {
+                const scPath = path.join(fontsDir, 'NotoSansSC-Medium.ttf');
+                if (fs.existsSync(scPath)) {
+                    notoSansSC = await doc.embedFont(fs.readFileSync(scPath));
+                }
+            } else if (countryCode === 'TW' || countryCode === 'HK' || countryCode === 'MO') {
+                const tcPath = path.join(fontsDir, 'NotoSansTC-Medium.ttf');
+                if (fs.existsSync(tcPath)) {
+                    notoSansTC = await doc.embedFont(fs.readFileSync(tcPath));
+                }
+            } else if (countryCode === 'SG') {
+                // Singapore uses Simplified Chinese
+                const scPath = path.join(fontsDir, 'NotoSansSC-Medium.ttf');
+                if (fs.existsSync(scPath)) {
+                    notoSansSC = await doc.embedFont(fs.readFileSync(scPath));
+                }
+            }
+        } catch (e) {
+            console.warn(`Could not load CJK font for country ${countryCode}, using fallback`, e);
         }
-        if (fs.existsSync(krPath)) {
-            notoSansKR = await doc.embedFont(fs.readFileSync(krPath));
-        }
-        if (fs.existsSync(scPath)) {
-            notoSansSC = await doc.embedFont(fs.readFileSync(scPath));
-        }
-        if (fs.existsSync(tcPath)) {
-            notoSansTC = await doc.embedFont(fs.readFileSync(tcPath));
-        }
-    } catch (e) {
-        console.warn('Could not load CJK fonts, using fallback', e);
     }
 
     // Load Assets
@@ -748,7 +768,7 @@ export async function generateCustomPlannerPdf(options: CustomPlannerOptions): P
     // 2. APPLY HYPERLINKS
     applyHyperlinks(context);
 
-    return await doc.save();
+    return await doc.save({ useObjectStreams: false });
 }
 
 function renderPlaceholders(
