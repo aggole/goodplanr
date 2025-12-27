@@ -537,7 +537,12 @@ const HOLIDAY_ABBREVIATIONS: Record<string, string> = {
 
     // China - remove duplicate traditional Chinese
     '清明节 清明節': '清明节',
+
+    // Taiwan - Fix Simplified Chinese to Traditional
+    '农历新年假期': '農曆新年假期',
 };
+
+
 
 
 /**
