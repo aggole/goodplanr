@@ -463,7 +463,7 @@ const HOLIDAY_ABBREVIATIONS: Record<string, string> = {
     'Bobotează': 'Epiphany',
     'Sfântul Ion': "St. John's",
     'Ziua Unirii Principatelor Române': 'Union Day RO',
-    'Ziua Mamei': "Mother's Day",
+    'Ziua Mamei': "Women's Day",
     'Vinerea Mare': 'Good Friday',
     'Paștele': 'Easter',
     'A doua zi de Pasti': 'Easter Monday',

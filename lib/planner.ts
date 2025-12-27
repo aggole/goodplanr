@@ -978,9 +978,10 @@ function renderPlaceholders(
 
                 // Check for holiday
                 let isHolidayDate = false;
+                let holiday: Holiday | null = null;
                 const holidaySettings = ctx.holidaySettings;
                 if (holidaySettings?.countryCode) {
-                    const holiday = isHoliday(dateObj, holidaySettings.countryCode, {
+                    holiday = isHoliday(dateObj, holidaySettings.countryCode, {
                         showPublic: holidaySettings.showPublic !== false,
                         showBank: holidaySettings.showBank !== false,
                         showObservance: holidaySettings.showObservance === true
