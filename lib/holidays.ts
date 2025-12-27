@@ -540,6 +540,7 @@ const HOLIDAY_ABBREVIATIONS: Record<string, string> = {
 
     // Taiwan - Fix Simplified Chinese to Traditional
     '农历新年假期': '農曆新年假期',
+    '国际妇女节': '國際婦女節',
 };
 
 
@@ -558,8 +559,9 @@ export function getHolidayDisplayName(name: string, maxLength: number = MAX_HOLI
     const substitutePatternMap: Array<{ pattern: RegExp, suffix: string, suffixLength: number }> = [
         // Japanese: 振替 (furikae = substitute)
         { pattern: /\s*\(振替休日\)$/, suffix: ' 振替', suffixLength: 3 },
-        // Taiwanese/Chinese: 更换 (gēnghuàn = substitute)
-        { pattern: /\s*\(更换日\)$/, suffix: ' 更换', suffixLength: 3 },
+        // Taiwanese/Chinese: 更換 (gēnghuàn = substitute) - Fix Simplified 更换 -> Traditional 更換
+        { pattern: /\s*\(更换日\)$/, suffix: ' 更換', suffixLength: 3 },
+        { pattern: /\s*\(更換日\)$/, suffix: ' 更換', suffixLength: 3 }, // Catch already traditional
         // Spanish: sust. (sustituto)
         { pattern: /\s*\(día sustituto\)$/i, suffix: ' (sust.)', suffixLength: 8 },
         // English variants: (obs.) = shorter version of "observed"
