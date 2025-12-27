@@ -53,6 +53,23 @@ export function PlannerLayout() {
     const [weeklyLayout, setWeeklyLayout] = useState("vertical")
     const [dailyLayout, setDailyLayout] = useState("grid")
     const [loading, setLoading] = useState(false)
+    const [previewModal, setPreviewModal] = useState<string | null>(null)
+
+    // Get preview image based on layout selection
+    const getPreviewImage = (type: 'monthly' | 'weekly' | 'daily') => {
+        if (type === 'monthly') return '/previews/monthly-preview.jpg';
+        if (type === 'weekly') {
+            return weeklyLayout === 'flexi'
+                ? '/previews/weekly-flexi-preview.jpg'
+                : '/previews/weekly-vertical-preview.jpg';
+        }
+        if (type === 'daily') {
+            return dailyLayout === 'classic'
+                ? '/previews/daily-classic-preview.jpg'
+                : '/previews/daily-grid-preview.jpg';
+        }
+        return '';
+    }
 
     // Data-fetching logic for PDF generation
     const handleGenerate = async () => {
@@ -104,7 +121,7 @@ export function PlannerLayout() {
             {/* Logo and Header */}
             <div className="text-center mb-8">
                 <div className="flex justify-center mb-4">
-                    <Image src="/images/goodplanr-logo.png" alt="GoodPlanr Logo" width={80} height={80} className="w-20 h-20" />
+                    <Image src="/images/goodplanr-logo.png" alt="GoodPlanr Logo" width={80} height={80} className="w-auto h-20 object-contain" />
                 </div>
                 <h1 className="text-3xl font-normal mb-3 text-black">GoodPlanr</h1>
                 <p className="text-base text-gray-700">Build professional digital planners with customizable holidays</p>
@@ -202,16 +219,34 @@ export function PlannerLayout() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 {/* Monthly Preview */}
                 <div>
-                    <div className="aspect-[3/4] border-2 border-gray-300 rounded bg-white flex items-center justify-center mb-3">
-                        <span className="text-sm text-gray-700">Preview image</span>
+                    <div
+                        className="border-2 border-gray-300 rounded bg-white overflow-hidden mb-3 cursor-pointer hover:border-gray-400 transition-colors"
+                        onClick={() => setPreviewModal(getPreviewImage('monthly'))}
+                    >
+                        <Image
+                            src={getPreviewImage('monthly')}
+                            alt="Monthly Preview"
+                            width={600}
+                            height={800}
+                            className="w-full h-auto"
+                        />
                     </div>
                     <p className="text-center text-base font-normal text-black">Monthly</p>
                 </div>
 
                 {/* Weekly Preview */}
                 <div>
-                    <div className="aspect-[3/4] border-2 border-gray-300 rounded bg-white flex items-center justify-center mb-3">
-                        <span className="text-sm text-gray-700">Preview image</span>
+                    <div
+                        className="border-2 border-gray-300 rounded bg-white overflow-hidden mb-3 cursor-pointer hover:border-gray-400 transition-colors"
+                        onClick={() => setPreviewModal(getPreviewImage('weekly'))}
+                    >
+                        <Image
+                            src={getPreviewImage('weekly')}
+                            alt="Weekly Preview"
+                            width={600}
+                            height={800}
+                            className="w-full h-auto"
+                        />
                     </div>
                     <p className="text-center text-base font-normal text-black mb-3">Weekly</p>
                     <div>
@@ -230,8 +265,17 @@ export function PlannerLayout() {
 
                 {/* Daily Preview */}
                 <div>
-                    <div className="aspect-[3/4] border-2 border-gray-300 rounded bg-white flex items-center justify-center mb-3">
-                        <span className="text-sm text-gray-700">Preview image</span>
+                    <div
+                        className="border-2 border-gray-300 rounded bg-white overflow-hidden mb-3 cursor-pointer hover:border-gray-400 transition-colors"
+                        onClick={() => setPreviewModal(getPreviewImage('daily'))}
+                    >
+                        <Image
+                            src={getPreviewImage('daily')}
+                            alt="Daily Preview"
+                            width={600}
+                            height={800}
+                            className="w-full h-auto"
+                        />
                     </div>
                     <p className="text-center text-base font-normal text-black mb-3">Daily</p>
                     <div>
@@ -248,6 +292,8 @@ export function PlannerLayout() {
                     </div>
                 </div>
             </div>
+
+
 
             {/* Download Button */}
             <div className="flex justify-center mt-12">
@@ -269,6 +315,30 @@ export function PlannerLayout() {
                     )}
                 </Button>
             </div>
+
+            {/* Preview Modal */}
+            {previewModal && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+                    onClick={() => setPreviewModal(null)}
+                >
+                    <div className="relative max-w-4xl max-h-full">
+                        <button
+                            onClick={() => setPreviewModal(null)}
+                            className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full w-10 h-10 flex items-center justify-center hover:bg-opacity-75 transition-colors"
+                        >
+                            ✕
+                        </button>
+                        <Image
+                            src={previewModal}
+                            alt="Preview"
+                            width={1200}
+                            height={1600}
+                            className="max-w-full max-h-[90vh] object-contain rounded"
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

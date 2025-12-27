@@ -14,7 +14,7 @@ export default async function handler(
         return;
     }
 
-    const { year, startDay, weeklyLayout, dailyLayout, holidaySettings } = req.body;
+    const { year, startDay, weeklyLayout, dailyLayout, holidaySettings, enableCompression } = req.body;
 
     try {
         // Load the saved config for Classic planner (if exists)
