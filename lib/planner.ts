@@ -37,6 +37,8 @@ export interface PlaceholderConfig {
 export interface CustomPlannerOptions {
     year: number;
     startDay: 'Monday' | 'Sunday';
+    weeklyLayout?: 'vertical' | 'flexi'; // Weekly template choice
+    dailyLayout?: 'grid' | 'classic'; // Daily template choice
     config: {
         mini?: PlaceholderConfig[]; // New Mini Calendar Definition
         yearly?: PlaceholderConfig[];
@@ -565,7 +567,11 @@ export async function generateCustomPlannerPdf(options: CustomPlannerOptions): P
 
     // WEEKLY
     if (options.scope === 'full' || options.scope === 'weekly') {
-        const template = await loadTemplate('weekly_template.pdf');
+        // Select template based on layout choice
+        const weeklyTemplateName = options.weeklyLayout === 'flexi'
+            ? 'weekly_flexi_template.pdf'
+            : 'weekly_template.pdf';
+        const template = await loadTemplate(weeklyTemplateName);
 
         // 1. Prev Dec Weeks
         if (options.scope === 'full' && context.prevDecWeeklyPageIndices.length > 0) {
@@ -633,7 +639,11 @@ export async function generateCustomPlannerPdf(options: CustomPlannerOptions): P
 
     // DAILY
     if (options.scope === 'full' || options.scope === 'daily') {
-        const template = await loadTemplate('daily_template.pdf');
+        // Select template based on layout choice
+        const dailyTemplateName = options.dailyLayout === 'classic'
+            ? 'daily_classic_template.pdf'
+            : 'daily_template.pdf';
+        const template = await loadTemplate(dailyTemplateName);
 
         // 1. Prev Dec Days (31 days) -> Dec 1 to Dec 31
         if (options.scope === 'full' && context.prevDecDailyPageIndices.length > 0) {
