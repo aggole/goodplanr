@@ -335,7 +335,8 @@ export default function PlannerBuilder() {
         overview: [
             { type: 'NAVIGATION_TABS', label: 'Navigation Tabs' },
             { type: 'VERTICAL_MONTH_GRID', label: 'Vertical Grid (Date/Day)' },
-            { type: 'YEAR_LABEL', label: 'Year Label' }
+            { type: 'YEAR_LABEL', label: 'Year Label' },
+            { type: 'MONTH_NAME', label: 'Month Names (1x6 Grid)' }
         ],
         monthly: [
             { type: 'NAVIGATION_TABS', label: 'Navigation Tabs' },
@@ -413,6 +414,11 @@ export default function PlannerBuilder() {
             gridConfig = { cols: 2, rows: 31, width: 15, height: 15, paddingX: 0, paddingY: 0 };
             fontSize = 8;
             if (label === 'Vertical Grid (Date/Day)') label = '1';
+        } else if (type === 'MONTH_NAME') {
+            // 6 columns for months (Jan-Jun or Jul-Dec), 1 row
+            gridConfig = { cols: 6, rows: 1, width: 80, height: 20, paddingX: 5, paddingY: 0 };
+            fontSize = 12;
+            if (label === 'Month Names (1x6 Grid)') label = '1'; // Start with Jan-Jun
         } else if (type === 'WEEK_NUMBER' && activeTab === 'monthly') {
             gridConfig = { cols: 1, rows: 6, width: 30, height: 20, paddingX: 2, paddingY: 2 };
             fontSize = 12;

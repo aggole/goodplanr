@@ -1,0 +1,40 @@
+Holiday Names for Sweden (SE)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Kristi himmelfärdsdag                         → Ascension Day   (13)
+   Sveriges nationaldag                          → Sweden Day      (10)
+   Marie Bebådelsedag                            → Annunciation    (12)
+   Valborgsmässoafton                            → Walpurgis       (9)
+   Gustav-Adolf-dagen                            → Gustaf Adolf    (12)
+   Trettondagsafton                              → Epiphany Eve    (12)
+   Trettondedag jul                              → Epiphany        (8)
+   Alla Helgons dag                              → All Saints'     (11)
+   Annandag pingst                               → Whit Monday     (11)
+   Allhelgonaafton                               → All Saints Eve  (14)
+   Tjugondag Knut                                → Knut Day        (8)
+   Midsommarafton                                → Midsummer Eve   (13)
+   Midsommardagen                                → Midsummer       (9)
+   Skärtorsdagen                                 → Maundy Thurs    (12)
+   Annandag påsk                                 → Easter Monday   (13)
+   Långfredagen                                  → Good Friday     (11)
+   Annandag jul                                  → Boxing Day      (10)
+   Pingstafton                                   → Whit Eve        (8)
+   Pingstdagen                                   → Whit Sunday     (11)
+   Nyårsdagen                                    → New Year        (8)
+   Vasaloppet                                    → Vasa Race       (9)
+   Första Maj                                    → Labour Day      (10)
+   Mårtensgås                                    → Martin's Day    (12)
+   Nobeldagen                                    → Nobel Day       (9)
+   Luciadagen                                    → St. Lucia       (9)
+   Nyårsafton                                    → New Year's Eve  (14)
+   Påskafton                                     → Easter Eve      (10)
+   Påskdagen                                     → Easter Sunday   (13)
+   Mors dag                                      → Mother's Day    (12)
+   Julafton                                      → Julafton        (8)
+   Juldagen                                      → Christmas Day   (13)
+
+==========================================================================================
+Total: 31 holidays
+✅ All holidays fit within 15 chars

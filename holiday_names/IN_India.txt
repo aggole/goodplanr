@@ -1,0 +1,15 @@
+Holiday Names for India (IN)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Ambedkar Jayanti                              → Ambedkar Day    (12)
+   Independence Day                              → Indep. Day      (10)
+   Gandhi Jayanti                                → Gandhi Day      (10)
+   Christmas Day                                 → Christmas       (9)
+   Republic Day                                  → Republic        (8)
+   Good Friday                                   → Good Friday     (11)
+
+==========================================================================================
+Total: 6 holidays
+✅ All holidays fit within 15 chars

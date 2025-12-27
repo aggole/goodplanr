@@ -1,0 +1,27 @@
+Holiday Names for Czech Republic (CZ)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Nový rok a Den obnovy samostatného českého st → New Year        (8)
+   Den vzniku samostatného československého stát → Czech Indep     (11)
+   Den slovanských věrozvěstů Cyrila a Metoděje  → Cyril & Meth    (12)
+   Den boje za svobodu a demokracii              → Freedom Day     (11)
+   Den upálení mistra Jana Husa                  → Jan Hus Day     (11)
+   Velikonoční pondělí                           → Easter Monday   (13)
+   Den české státnosti                           → Statehood       (9)
+   Velikonoční neděle                            → Easter Sunday   (13)
+   1. svátek vánoční                             → Christmas Day   (13)
+   2. svátek vánoční                             → Boxing Day      (10)
+   Škaredá středa                                → Spy Wednesday   (13)
+   Zelený čtvrtek                                → Maundy Thurs    (12)
+   Den vítězství                                 → Victory Day     (11)
+   Svátek práce                                  → Labour Day      (10)
+   Velký pátek                                   → Good Friday     (11)
+   Bílá sobota                                   → Holy Saturday   (13)
+   Štědrý den                                    → Christmas Eve   (13)
+   Den matek                                     → Mother's Day    (12)
+
+==========================================================================================
+Total: 18 holidays
+✅ All holidays fit within 15 chars

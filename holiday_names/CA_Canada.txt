@@ -1,0 +1,27 @@
+Holiday Names for Canada (CA)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   National Day for Truth and Reconciliation     → Truth&Recon     (11)
+   St. Patrick’s Day                             → St Patrick      (10)
+   Valentine's Day                               → Valentine's     (11)
+   Remembrance Day                               → Remembrance Day (15)
+   New Year's Day                                → New Year        (8)
+   Groundhog Day                                 → Groundhog Day   (13)
+   Easter Sunday                                 → Easter Sun      (10)
+   Civic Holiday                                 → Civic Holiday   (13)
+   Christmas Day                                 → Christmas       (9)
+   Mother's Day                                  → Mother's        (8)
+   Victoria Day                                  → Victoria Day    (12)
+   Father's Day                                  → Father's        (8)
+   Thanksgiving                                  → Thanksgiving    (12)
+   Good Friday                                   → Good Friday     (11)
+   Canada Day                                    → Canada Day      (10)
+   Labour Day                                    → Labour Day      (10)
+   Boxing Day                                    → Boxing Day      (10)
+   Halloween                                     → Halloween       (9)
+
+==========================================================================================
+Total: 18 holidays
+✅ All holidays fit within 15 chars

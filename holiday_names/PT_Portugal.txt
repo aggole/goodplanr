@@ -1,0 +1,26 @@
+Holiday Names for Portugal (PT)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Restauração da Independência                  → Restoration     (11)
+   Implantação da República                      → Republic Day    (12)
+   Imaculada Conceição                           → Immaculate C.   (13)
+   Véspera de Ano Novo                           → New Year's Eve  (14)
+   Dia do trabalhador                            → Labour Day      (10)
+   Sexta-Feira Santa                             → Good Friday     (11)
+   Assunção de Maria                             → Assumption      (10)
+   Dia da Liberdade                              → Freedom Day     (11)
+   Dia de Portugal                               → Portugal Day    (12)
+   Todos os santos                               → All Saints'     (11)
+   Noite de Natal                                → Christmas Eve   (13)
+   Corpo de Deus                                 → Corpus Christi  (14)
+   Dia das Mães                                  → Mother's Day    (12)
+   Ano Novo                                      → New Year        (8)
+   Carnaval                                      → Carnival        (8)
+   Páscoa                                        → Easter          (6)
+   Natal                                         → Christmas       (9)
+
+==========================================================================================
+Total: 17 holidays
+✅ All holidays fit within 15 chars

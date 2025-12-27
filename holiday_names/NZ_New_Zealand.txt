@@ -1,0 +1,26 @@
+Holiday Names for New Zealand (NZ)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Day after New Year's Day (substitute day)     → NY Day 2 (obs.) (15)
+   Christmas Day (substitute day)                → Christmas (obs.) (16)
+   Waitangi Day (substitute day)                 → Waitangi (obs.) (15)
+   Boxing Day (substitute day)                   → Boxing Day (obs.) (17)
+   ANZAC Day (substitute day)                    → ANZAC Day (obs.) (16)
+   Day after New Year's Day                      → NY Day 2        (8)
+   King's Birthday                               → King Bday       (9)
+   New Year's Day                                → New Year        (8)
+   Easter Sunday                                 → Easter Sun      (10)
+   Easter Monday                                 → Easter Mon      (10)
+   Christmas Day                                 → Christmas       (9)
+   Waitangi Day                                  → Waitangi        (8)
+   Good Friday                                   → Good Friday     (11)
+   Labour Day                                    → Labour Day      (10)
+   Boxing Day                                    → Boxing Day      (10)
+   ANZAC Day                                     → ANZAC Day       (9)
+   Matariki                                      → Matariki        (8)
+
+==========================================================================================
+Total: 17 holidays
+✅ All holidays fit within 15 chars

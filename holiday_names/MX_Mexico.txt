@@ -1,0 +1,21 @@
+Holiday Names for Mexico (MX)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Día de la Virgen de Guadalupe                 → Guadalupe Day   (13)
+   Natalicio de Benito Juárez                    → Juárez Day      (10)
+   Día de la Independencia                       → Independence    (12)
+   Día de la Constitución                        → Const. Day MX   (13)
+   Día de la Revolución                          → Revolution Day  (14)
+   Día de los Difuntos                           → All Souls'      (10)
+   Día del Trabajador                            → Labour Day      (10)
+   Día de la Madre                               → Mother's Day    (12)
+   Viernes Santo                                 → Good Friday     (11)
+   Jueves Santo                                  → Maundy Thurs    (12)
+   Año Nuevo                                     → New Year        (8)
+   Navidad                                       → Christmas       (9)
+
+==========================================================================================
+Total: 12 holidays
+✅ All holidays fit within 15 chars

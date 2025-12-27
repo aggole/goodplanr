@@ -1,0 +1,39 @@
+Holiday Names for Germany (DE)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Sankt Martin (Faschingsbeginn)                → St. Martin's    (12)
+   Tag der Deutschen Einheit                     → German Unity    (12)
+   Christi Himmelfahrt                           → Ascension Day   (13)
+   Faschingsdienstag                             → Shrove Tue      (10)
+   1. Weihnachtstag                              → Christmas Day   (13)
+   2. Weihnachtstag                              → Boxing Day      (10)
+   Weiberfastnacht                               → Women's Crnvl   (13)
+   Buß- und Bettag                               → Repentance      (10)
+   Aschermittwoch                                → Ash Wednesday   (13)
+   Gründonnerstag                                → Maundy Thurs    (12)
+   Pfingstsonntag                                → Whit Sunday     (11)
+   Volkstrauertag                                → Memorial Day    (12)
+   Heiliger Abend                                → Christmas Eve   (13)
+   Pfingstmontag                                 → Whit Monday     (11)
+   Allerheiligen                                 → All Saints'     (11)
+   Valentinstag                                  → Valentine's     (11)
+   Ostersonntag                                  → Easter Sunday   (13)
+   Totensonntag                                  → Eternity Sun    (12)
+   Rosenmontag                                   → Rose Monday     (11)
+   Ostermontag                                   → Easter Monday   (13)
+   Maifeiertag                                   → Labour Day      (10)
+   Allerseelen                                   → All Souls'      (10)
+   Karfreitag                                    → Good Friday     (11)
+   Muttertag                                     → Mother's Day    (12)
+   1. Advent                                     → 1st Advent      (10)
+   2. Advent                                     → 2nd Advent      (10)
+   3. Advent                                     → 3rd Advent      (10)
+   4. Advent                                     → 4th Advent      (10)
+   Silvester                                     → New Year's Eve  (14)
+   Neujahr                                       → New Year        (8)
+
+==========================================================================================
+Total: 30 holidays
+✅ All holidays fit within 15 chars

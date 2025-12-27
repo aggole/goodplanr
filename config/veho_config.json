@@ -1,0 +1,37 @@
+{
+  "plannerType": "veho",
+  "placeholders": {
+    "yearly": [],
+    "overview": [],
+    "monthly": [],
+    "weekly": [],
+    "daily": [],
+    "mini": [],
+    "global": [],
+    "subpages": []
+  },
+  "extras": {
+    "grid": {
+      "count": 1
+    },
+    "dot": {
+      "count": 1
+    },
+    "line": {
+      "count": 1
+    },
+    "blank": {
+      "count": 1
+    }
+  },
+  "activeTab": "weekly",
+  "year": 2026,
+  "startDay": "Sunday",
+  "holidaySettings": {
+    "countryCode": "CN",
+    "showPublic": true,
+    "showBank": true,
+    "showObservance": false,
+    "displayStyle": "all"
+  }
+}

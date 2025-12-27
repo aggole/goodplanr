@@ -1,0 +1,28 @@
+Holiday Names for Brazil (BR)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Proclamação da República                      → Republic Day    (12)
+   Dia da Consciência Negra                      → Black Aware     (11)
+   Nossa Senhora Aparecida                       → Aparecida Day   (13)
+   Dia da Independência                          → Independence    (12)
+   Véspera de Ano Novo                           → New Year's Eve  (14)
+   Dia do trabalhador                            → Labour Day      (10)
+   Sexta-Feira Santa                             → Good Friday     (11)
+   Dia de Tiradentes                             → Tiradentes      (10)
+   Dia dos Namorados                             → Valentine's     (11)
+   Dia de Finados                                → All Souls'      (10)
+   Noite de Natal                                → Christmas Eve   (13)
+   Dia de Eleição                                → Dia de Eleição  (14)
+   Corpo de Deus                                 → Corpus Christi  (14)
+   Dia das Mães                                  → Mother's Day    (12)
+   Dia dos Pais                                  → Father's Day    (12)
+   Ano Novo                                      → New Year        (8)
+   Carnaval                                      → Carnival        (8)
+   Páscoa                                        → Easter          (6)
+   Natal                                         → Christmas       (9)
+
+==========================================================================================
+Total: 19 holidays
+✅ All holidays fit within 15 chars

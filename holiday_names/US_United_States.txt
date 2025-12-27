@@ -1,0 +1,35 @@
+Holiday Names for United States (US)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Independence Day (substitute day)             → Indep. Day (obs.) (17)
+   Administrative Professionals Day              → Admin Prof Day  (14)
+   New Year's Day (substitute day)               → New Year (obs.) (15)
+   Christmas Day (substitute day)                → Christmas (obs.) (16)
+   Juneteenth (substitute day)                   → Juneteenth (obs.) (17)
+   Martin Luther King Jr. Day                    → MLK Day         (7)
+   Day after Thanksgiving Day                    → Post-Thanksgiving (17)
+   Washington's Birthday                         → Presidents Day  (14)
+   St. Patrick's Day                             → St. Patrick's Day (17)
+   Independence Day                              → Indep. Day      (10)
+   Thanksgiving Day                              → Thanksgiving Day (16)
+   Valentine's Day                               → Valentine's     (11)
+   New Year's Day                                → New Year        (8)
+   New Year's Eve                                → New Year's Eve  (14)
+   Easter Sunday                                 → Easter Sun      (10)
+   Christmas Eve                                 → Christmas Eve   (13)
+   Christmas Day                                 → Christmas       (9)
+   Mother's Day                                  → Mother's        (8)
+   Memorial Day                                  → Memorial        (8)
+   Father's Day                                  → Father's        (8)
+   Columbus Day                                  → Columbus        (8)
+   Veterans Day                                  → Veterans        (8)
+   Juneteenth                                    → Juneteenth      (10)
+   Labor Day                                     → Labor Day       (9)
+   Halloween                                     → Halloween       (9)
+   Tax Day                                       → Tax Day         (7)
+
+==========================================================================================
+Total: 26 holidays
+✅ All holidays fit within 15 chars

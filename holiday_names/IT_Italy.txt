@@ -1,0 +1,23 @@
+Holiday Names for Italy (IT)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Anniversario della Liberazione                → Liberation      (10)
+   Festa della Repubblica                        → Republic Day    (12)
+   San Francesco d'Assisi                        → S. Francesco    (12)
+   Immacolata Concezione                         → Immaculate C.   (13)
+   Domenica di Pasqua                            → Easter          (6)
+   Lunedì dell’Angelo                            → Easter Monday   (13)
+   Festa della mamma                             → Mother's Day    (12)
+   Festa del Lavoro                              → Labour Day      (10)
+   Santo Stefano                                 → St. Stephen's   (13)
+   Ferragosto                                    → Assumption      (10)
+   Ognissanti                                    → All Saints'     (11)
+   Capodanno                                     → New Year        (8)
+   Befana                                        → Epiphany        (8)
+   Natale                                        → Christmas       (9)
+
+==========================================================================================
+Total: 14 holidays
+✅ All holidays fit within 15 chars

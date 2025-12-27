@@ -1,0 +1,24 @@
+Holiday Names for Ireland (IE)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   St. Stephen's Day (substitute day)            → St Stephen (obs.) (17)
+   First Monday in August                        → Aug Bank        (8)
+   First Monday in June                          → June Bank       (9)
+   October Bank Holiday                          → Oct Bank        (8)
+   St. Patrick’s Day                             → St Patrick      (10)
+   St. Stephen's Day                             → St Stephen      (10)
+   St. Brigid’s Day                              → St Brigid       (9)
+   New Year's Day                                → New Year        (8)
+   Easter Sunday                                 → Easter Sun      (10)
+   Easter Monday                                 → Easter Mon      (10)
+   Christmas Day                                 → Christmas       (9)
+   Mother's Day                                  → Mother's        (8)
+   Father's Day                                  → Father's        (8)
+   Good Friday                                   → Good Friday     (11)
+   May Day                                       → May Day         (7)
+
+==========================================================================================
+Total: 15 holidays
+✅ All holidays fit within 15 chars

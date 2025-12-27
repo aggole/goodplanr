@@ -1,0 +1,27 @@
+Holiday Names for Belgium (BE)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Lundi de Pentecôte                            → Whit Monday     (11)
+   Lundi de Pâques                               → Easter Monday   (13)
+   Fête du travail                               → Labour Day      (10)
+   Saint-Valentin                                → Valentine's     (11)
+   Fête des Mères                                → Mother's Day    (12)
+   Fête nationale                                → National Day    (12)
+   Fête des morts                                → All Souls'      (10)
+   Saint-Nicolas                                 → St. Nicholas    (12)
+   l'Épiphanie                                   → Epiphany        (8)
+   Fête du Roi                                   → King's Day      (10)
+   Assomption                                    → Assumption      (10)
+   Nouvel An                                     → New Year        (8)
+   Ascension                                     → Ascension Day   (13)
+   Pentecôte                                     → Whit Sunday     (11)
+   Toussaint                                     → All Saints'     (11)
+   Armistice                                     → Armistice Day   (13)
+   Pâques                                        → Easter          (6)
+   Noël                                          → Christmas       (9)
+
+==========================================================================================
+Total: 18 holidays
+✅ All holidays fit within 15 chars

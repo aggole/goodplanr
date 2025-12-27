@@ -1,0 +1,28 @@
+Holiday Names for Netherlands (NL)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Nationale Dodenherdenking                     → Remembrance     (11)
+   Tweede pinksterdag                            → Whit Monday     (11)
+   Sinterklaasavond                              → St. Nicholas    (12)
+   Tweede kerstdag                               → Boxing Day      (10)
+   Tweede paasdag                                → Easter Monday   (13)
+   Bevrijdingsdag                                → Liberation      (10)
+   Hemelvaartsdag                                → Ascension Day   (13)
+   Koninkrijksdag                                → Kingdom Day     (11)
+   Oudejaarsavond                                → New Year's Eve  (14)
+   Goede Vrijdag                                 → Good Friday     (11)
+   Sint-Maarten                                  → St. Martin's    (12)
+   Prinsjesdag                                   → Prince's Day    (12)
+   Koningsdag                                    → King's Day      (10)
+   Pinksteren                                    → Whit Sunday     (11)
+   Nieuwjaar                                     → New Year        (8)
+   Moederdag                                     → Mother's Day    (12)
+   Vaderdag                                      → Father's Day    (12)
+   Kerstmis                                      → Christmas       (9)
+   Pasen                                         → Easter          (6)
+
+==========================================================================================
+Total: 19 holidays
+✅ All holidays fit within 15 chars

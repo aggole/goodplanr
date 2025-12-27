@@ -1,0 +1,889 @@
+{
+  "placeholders": {
+    "yearly": [
+      {
+        "id": "1765205168110",
+        "type": "MINI_CALENDAR_INSTANCE",
+        "label": "1",
+        "x": 224,
+        "y": 96,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left"
+        }
+      },
+      {
+        "id": "1765206222197",
+        "type": "MINI_CALENDAR_INSTANCE",
+        "label": "2",
+        "x": 430,
+        "y": 96,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left"
+        }
+      },
+      {
+        "id": "1765208172974",
+        "type": "MINI_CALENDAR_INSTANCE",
+        "label": "3",
+        "x": 636,
+        "y": 96,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left"
+        }
+      },
+      {
+        "id": "1765208231497",
+        "type": "MINI_CALENDAR_INSTANCE",
+        "label": "4",
+        "x": 224,
+        "y": 290,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left"
+        }
+      },
+      {
+        "id": "1765208306861",
+        "type": "MINI_CALENDAR_INSTANCE",
+        "label": "5",
+        "x": 430,
+        "y": 290,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left"
+        }
+      },
+      {
+        "id": "1765208313225",
+        "type": "MINI_CALENDAR_INSTANCE",
+        "label": "6",
+        "x": 636,
+        "y": 290,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left"
+        }
+      },
+      {
+        "id": "1765208367713",
+        "type": "MINI_CALENDAR_INSTANCE",
+        "label": "7",
+        "x": 224,
+        "y": 484,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left"
+        }
+      },
+      {
+        "id": "1765208376107",
+        "type": "MINI_CALENDAR_INSTANCE",
+        "label": "8",
+        "x": 430,
+        "y": 484,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left"
+        }
+      },
+      {
+        "id": "1765208388929",
+        "type": "MINI_CALENDAR_INSTANCE",
+        "label": "9",
+        "x": 636,
+        "y": 484,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left"
+        }
+      },
+      {
+        "id": "1765208481149",
+        "type": "MINI_CALENDAR_INSTANCE",
+        "label": "10",
+        "x": 224,
+        "y": 678,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left"
+        }
+      },
+      {
+        "id": "1765208532642",
+        "type": "MINI_CALENDAR_INSTANCE",
+        "label": "11",
+        "x": 430,
+        "y": 678,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left"
+        }
+      },
+      {
+        "id": "1765208559000",
+        "type": "MINI_CALENDAR_INSTANCE",
+        "label": "12",
+        "x": 636,
+        "y": 678,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left"
+        }
+      },
+      {
+        "id": "1765214275730",
+        "type": "CUSTOM_TEXT",
+        "label": "%year%",
+        "x": 102,
+        "y": 254,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 16,
+          "textTransform": "uppercase",
+          "align": "center",
+          "letterSpacing": 0
+        }
+      }
+    ],
+    "overview": [
+      {
+        "id": "42980b86-3dfc-49ec-b7ba-cee62dc36791",
+        "type": "VERTICAL_MONTH_GRID",
+        "label": "1",
+        "x": 334.75,
+        "y": 274.85,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 8,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 2,
+          "rows": 31,
+          "width": 15,
+          "height": 15,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "12cb2085-5966-4c36-8dcf-7b9ce67453c5",
+        "type": "VERTICAL_MONTH_GRID",
+        "label": "2",
+        "x": 499.75,
+        "y": 274.85,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 8,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 2,
+          "rows": 31,
+          "width": 15,
+          "height": 15,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "25d360e6-cd27-4d32-a6ce-c4f01d6f509a",
+        "type": "VERTICAL_MONTH_GRID",
+        "label": "3",
+        "x": 664.75,
+        "y": 274.85,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 8,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 2,
+          "rows": 31,
+          "width": 15,
+          "height": 15,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "a4623601-70a9-44ae-adc7-7c64f7c162aa",
+        "type": "VERTICAL_MONTH_GRID",
+        "label": "4",
+        "x": 829.75,
+        "y": 274.85,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 8,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 2,
+          "rows": 31,
+          "width": 15,
+          "height": 15,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "7cbc522a-a3d0-4c3c-8064-8761f1b639b4",
+        "type": "VERTICAL_MONTH_GRID",
+        "label": "5",
+        "x": 994.75,
+        "y": 274.85,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 8,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 2,
+          "rows": 31,
+          "width": 15,
+          "height": 15,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "1781d57f-774f-470a-b646-73f091728ba9",
+        "type": "VERTICAL_MONTH_GRID",
+        "label": "1",
+        "x": 1159.75,
+        "y": 274.85,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 8,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 2,
+          "rows": 31,
+          "width": 15,
+          "height": 15,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      }
+    ],
+    "monthly": [
+      {
+        "id": "1765122069035",
+        "type": "DATE_MAIN",
+        "label": "Main Dates (Grid)",
+        "x": 271,
+        "y": 4,
+        "style": {
+          "font": "Roboto-Light",
+          "fontSize": 16,
+          "textTransform": "none",
+          "align": "left"
+        },
+        "grid": {
+          "cols": 7,
+          "rows": 6,
+          "width": 150,
+          "height": 150,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "1765125261328",
+        "type": "WEEK_NUMBER",
+        "label": "Week Numbers",
+        "x": 252,
+        "y": -5.5,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "center",
+          "letterSpacing": -1
+        },
+        "grid": {
+          "cols": 1,
+          "rows": 6,
+          "width": 30,
+          "height": 149,
+          "paddingX": 0,
+          "paddingY": 1
+        }
+      },
+      {
+        "id": "1765128712535",
+        "type": "YEAR_LABEL",
+        "label": "Year",
+        "x": 102,
+        "y": 256,
+        "style": {
+          "font": "Roboto-Light",
+          "fontSize": 18,
+          "textTransform": "none",
+          "align": "center"
+        }
+      },
+      {
+        "id": "1765130694558",
+        "type": "MONTH_LABEL",
+        "label": "Month Label",
+        "x": 101,
+        "y": 213,
+        "style": {
+          "font": "Roboto-Light",
+          "fontSize": 28,
+          "textTransform": "uppercase",
+          "align": "center",
+          "letterSpacing": -1
+        }
+      },
+      {
+        "id": "1765133166474",
+        "type": "CUSTOM_TEXT",
+        "label": "%month%",
+        "x": 99.5,
+        "y": 56,
+        "style": {
+          "font": "Roboto-Thin",
+          "fontSize": 110,
+          "textTransform": "none",
+          "align": "center",
+          "letterSpacing": -17.5
+        }
+      },
+      {
+        "id": "1765184533622",
+        "type": "CUSTOM_TEXT",
+        "label": "%week_header_full%",
+        "x": 279,
+        "y": 34,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 16,
+          "textTransform": "uppercase",
+          "align": "left",
+          "letterSpacing": 0.2
+        },
+        "grid": {
+          "cols": 7,
+          "rows": 1,
+          "width": 148,
+          "height": 20,
+          "paddingX": 2,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "55e9bb27-94d9-4d9b-a83a-f292ef1f65b0",
+        "type": "MINI_CALENDAR_NEXT_MONTH",
+        "label": "Next Month",
+        "x": -27,
+        "y": 589,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "center",
+          "color": "#000000"
+        }
+      }
+    ],
+    "weekly": [
+      {
+        "id": "1765126303094",
+        "type": "WEEK_DATE",
+        "label": "Week Dates",
+        "x": 232,
+        "y": 42,
+        "style": {
+          "font": "Roboto-Light",
+          "fontSize": 27,
+          "textTransform": "none",
+          "align": "left"
+        },
+        "grid": {
+          "cols": 7,
+          "rows": 1,
+          "width": 145,
+          "height": 20,
+          "paddingX": 5,
+          "paddingY": 0,
+          "holidayOffsetY": 20,
+          "holidayOffsetX": 50,
+          "holidayFontSize": 10
+        }
+      },
+      {
+        "id": "1765134515844",
+        "type": "CUSTOM_TEXT",
+        "label": "%month%",
+        "x": 99.5,
+        "y": 56,
+        "style": {
+          "font": "Roboto-Thin",
+          "fontSize": 110,
+          "textTransform": "none",
+          "align": "center",
+          "letterSpacing": -17.5
+        }
+      },
+      {
+        "id": "1765134904706",
+        "type": "CUSTOM_TEXT",
+        "label": "%month_name%",
+        "x": 100,
+        "y": 213,
+        "style": {
+          "font": "Roboto-Light",
+          "fontSize": 28,
+          "textTransform": "uppercase",
+          "align": "center",
+          "letterSpacing": 0
+        }
+      },
+      {
+        "id": "1765135419413",
+        "type": "CUSTOM_TEXT",
+        "label": "%year%   WEEK %week%",
+        "x": 100,
+        "y": 254,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 14,
+          "textTransform": "none",
+          "align": "center",
+          "letterSpacing": 0
+        }
+      },
+      {
+        "id": "1765185361863",
+        "type": "CUSTOM_TEXT",
+        "label": "%week_header_short%",
+        "x": 305,
+        "y": 38,
+        "style": {
+          "font": "Roboto-Light",
+          "fontSize": 19.5,
+          "textTransform": "uppercase",
+          "align": "left",
+          "letterSpacing": 1
+        },
+        "grid": {
+          "cols": 7,
+          "rows": 1,
+          "width": 148,
+          "height": 20,
+          "paddingX": 2,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "10c94cbf-bae5-4a7c-8513-18a45929ff59",
+        "type": "MINI_CALENDAR_CURRENT_MONTH",
+        "label": "Current Month",
+        "x": -27,
+        "y": 290,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        }
+      }
+    ],
+    "daily": [
+      {
+        "id": "1765102081227",
+        "type": "DAILY_DATE",
+        "label": "Daily Date",
+        "x": 99.5,
+        "y": 56,
+        "style": {
+          "font": "Roboto-Thin",
+          "fontSize": 110,
+          "align": "center",
+          "letterSpacing": -10.5
+        }
+      },
+      {
+        "id": "1765102084625",
+        "type": "DAILY_DAY",
+        "label": "Day Name",
+        "x": 100,
+        "y": 213,
+        "style": {
+          "font": "Roboto-Light",
+          "fontSize": 26,
+          "textTransform": "uppercase",
+          "align": "center",
+          "letterSpacing": 0
+        }
+      },
+      {
+        "id": "1765187600852",
+        "type": "CUSTOM_TEXT",
+        "label": "%month_short%   WEEK %week%",
+        "x": 99,
+        "y": 254,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 14,
+          "textTransform": "uppercase",
+          "align": "center",
+          "letterSpacing": 0
+        }
+      },
+      {
+        "id": "1765188145238",
+        "type": "CUSTOM_TEXT",
+        "label": "%month%",
+        "x": 174,
+        "y": 164,
+        "style": {
+          "font": "Roboto-Thin",
+          "fontSize": 27,
+          "textTransform": "none",
+          "align": "center",
+          "letterSpacing": -4
+        }
+      },
+      {
+        "id": "b3f627c2-91c4-457d-960d-0d5e17ffb99e",
+        "type": "MINI_CALENDAR_CURRENT_MONTH",
+        "label": "Current Month",
+        "x": -27,
+        "y": 290,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        }
+      },
+      {
+        "id": "a2f8153f-e03b-4384-8e07-d1dec92baa36",
+        "type": "DAILY_HOLIDAY",
+        "label": "Holiday Label (Pill)",
+        "x": 100,
+        "y": 270,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "none",
+          "align": "center",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 1,
+          "rows": 1,
+          "width": 150,
+          "height": 24,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      }
+    ],
+    "mini": [
+      {
+        "id": "1765204757587",
+        "type": "MINI_CAL_GRID",
+        "label": "Dates (1-31)",
+        "x": 50,
+        "y": 54,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 11,
+          "textTransform": "none",
+          "align": "left"
+        },
+        "grid": {
+          "cols": 7,
+          "rows": 6,
+          "width": 21.5,
+          "height": 22,
+          "paddingX": 1,
+          "paddingY": 1
+        }
+      },
+      {
+        "id": "1765204780248",
+        "type": "MINI_CAL_HEADER",
+        "label": "Week Header (M T W...)",
+        "x": 50,
+        "y": 32,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 11,
+          "textTransform": "none",
+          "align": "left"
+        },
+        "grid": {
+          "cols": 7,
+          "rows": 1,
+          "width": 21.5,
+          "height": 10,
+          "paddingX": 1,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "1765206762498",
+        "type": "MINI_CAL_TITLE",
+        "label": "%month_short%",
+        "x": 135.5,
+        "y": 4,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 14,
+          "textTransform": "uppercase",
+          "align": "center"
+        }
+      }
+    ],
+    "global": [
+      {
+        "id": "971cfa34-af28-49e6-a569-125cd3189a75",
+        "type": "NAVIGATION_TABS",
+        "label": "Navigation Tabs (Global)",
+        "x": 203,
+        "y": -10.6,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 12,
+          "textTransform": "uppercase",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 1,
+          "rows": 12,
+          "width": 20,
+          "height": 77,
+          "paddingX": 0,
+          "paddingY": 0.5
+        }
+      },
+      {
+        "id": "98e9045b-871e-4a5f-b532-f49988184430",
+        "type": "LINK_RECT",
+        "label": "yearly",
+        "x": 82,
+        "y": 947,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 0,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 1,
+          "rows": 1,
+          "width": 38,
+          "height": 20,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "3f039222-543d-4803-9f57-21868ea85946",
+        "type": "LINK_RECT",
+        "label": "Grid",
+        "x": 0,
+        "y": 947,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 0,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 1,
+          "rows": 1,
+          "width": 20,
+          "height": 20,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "02dae0ba-24e9-42f0-aa34-f9d80405b011",
+        "type": "LINK_RECT",
+        "label": "Dot",
+        "x": 21,
+        "y": 947,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 0,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 1,
+          "rows": 1,
+          "width": 20,
+          "height": 20,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "3e4e11e9-6895-4352-bca5-4da0ebbfc8f9",
+        "type": "LINK_RECT",
+        "label": "Line",
+        "x": 42,
+        "y": 947,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 0,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 1,
+          "rows": 1,
+          "width": 20,
+          "height": 20,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "d1ffc9fe-3620-46c3-86f6-a7028ef4764f",
+        "type": "LINK_RECT",
+        "label": "blank",
+        "x": 63,
+        "y": 947,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 0,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 1,
+          "rows": 1,
+          "width": 20,
+          "height": 20,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "cda93e1e-7aae-4709-85db-5e75d410f749",
+        "type": "LINK_RECT",
+        "label": "Overview",
+        "x": 120,
+        "y": 947,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 0,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 1,
+          "rows": 1,
+          "width": 82,
+          "height": 20,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      },
+      {
+        "id": "3ce479e2-8253-44fc-b208-332a75066ebf",
+        "type": "LINK_RECT",
+        "label": "goodplanr.com",
+        "x": 1265,
+        "y": 947,
+        "style": {
+          "font": "Roboto-Regular",
+          "fontSize": 0,
+          "textTransform": "none",
+          "align": "left",
+          "color": "#000000"
+        },
+        "grid": {
+          "cols": 1,
+          "rows": 1,
+          "width": 100,
+          "height": 20,
+          "paddingX": 0,
+          "paddingY": 0
+        }
+      }
+    ],
+    "subpages": []
+  },
+  "extras": {
+    "grid": {
+      "count": 1
+    },
+    "dot": {
+      "count": 1
+    },
+    "line": {
+      "count": 1
+    },
+    "blank": {
+      "count": 1
+    }
+  },
+  "activeTab": "weekly",
+  "year": 2026,
+  "startDay": "Sunday",
+  "holidaySettings": {
+    "countryCode": "CN",
+    "showPublic": true,
+    "showBank": true,
+    "showObservance": false,
+    "displayStyle": "all"
+  }
+}

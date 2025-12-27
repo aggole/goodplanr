@@ -1,0 +1,28 @@
+Holiday Names for Austria (AT)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Heilige Drei Könige                           → Epiphany        (8)
+   Christi Himmelfahrt                           → Ascension Day   (13)
+   Mariä Himmelfahrt                             → Assumption      (10)
+   Nationalfeiertag                              → National Day    (12)
+   Mariä Empfängnis                              → Immaculate C.   (13)
+   Staatsfeiertag                                → National Day    (12)
+   Pfingstsonntag                                → Whit Sunday     (11)
+   Heiliger Abend                                → Christmas Eve   (13)
+   Pfingstmontag                                 → Whit Monday     (11)
+   Allerheiligen                                 → All Saints'     (11)
+   Ostersonntag                                  → Easter Sunday   (13)
+   Fronleichnam                                  → Corpus Christi  (14)
+   Ostermontag                                   → Easter Monday   (13)
+   Karsamstag                                    → Holy Saturday   (13)
+   Stefanitag                                    → St. Stephen's   (13)
+   Muttertag                                     → Mother's Day    (12)
+   Christtag                                     → Christmas Day   (13)
+   Silvester                                     → New Year's Eve  (14)
+   Neujahr                                       → New Year        (8)
+
+==========================================================================================
+Total: 19 holidays
+✅ All holidays fit within 15 chars

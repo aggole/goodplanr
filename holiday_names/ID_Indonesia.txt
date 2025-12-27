@@ -1,0 +1,23 @@
+Holiday Names for Indonesia (ID)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Hari Ulang Tahun Kemerdekaan Republik Indones → Independence    (12)
+   Hari Buruh Internasional                      → Labour Day      (10)
+   Kenaikan Yesus Kristus                        → Ascension Day   (13)
+   Maulid Nabi Muhammad                          → Mawlid          (6)
+   Hari Raya Idul Fitri                          → Eid al-Fitr     (11)
+   Hari Lahir Pancasila                          → Pancasila Day   (13)
+   Wafat Yesus Kristus                           → Good Friday     (11)
+   Hari Raya Idul Adha                           → Eid al-Adha     (11)
+   Tahun Baru Imlek                              → Chinese NY      (10)
+   Hari Raya Waisak                              → Vesak           (5)
+   Tahun Baru Islam                              → Islamic NY      (10)
+   Hari tahun baru                               → New Year        (8)
+   Hari Raya Nyepi                               → Nyepi           (5)
+   Hari Raya Natal                               → Christmas       (9)
+
+==========================================================================================
+Total: 14 holidays
+✅ All holidays fit within 15 chars

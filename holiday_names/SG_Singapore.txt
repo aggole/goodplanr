@@ -1,0 +1,21 @@
+Holiday Names for Singapore (SG)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Chinese New Year (substitute day)             → Chinese NY (obs.) (17)
+   National Day (substitute day)                 → Natnl Day (obs.) (16)
+   Chinese New Year                              → Chinese NY      (10)
+   Hari Raya Puasa                               → H Raya Puasa    (12)
+   New Year's Day                                → New Year        (8)
+   Hari Raya Haji                                → H Raya Haji     (11)
+   Christmas Day                                 → Christmas       (9)
+   National Day                                  → Natnl Day       (9)
+   Good Friday                                   → Good Friday     (11)
+   Labour Day                                    → Labour Day      (10)
+   Vesak Day                                     → Vesak           (5)
+   Deepavali                                     → Deepavali       (9)
+
+==========================================================================================
+Total: 12 holidays
+✅ All holidays fit within 15 chars

@@ -1,0 +1,40 @@
+Holiday Names for Philippines (PH)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Feast of the Immaculate Conception of the Ble → Immaculate C.   (13)
+   Feast of the Sacrifice (Eid al-Adha)          → Eid al-Adha     (11)
+   First Philippine Republic Day                 → PH Republic     (11)
+   Birthday of Muhammad (Mawlid)                 → Mawlid          (6)
+   End of Ramadan (Eid al-Fitr)                  → Eid al-Fitr     (11)
+   EDSA Revolution Anniversary                   → EDSA Anniv      (10)
+   José Rizal's birthday                         → Rizal Bday      (10)
+   Iglesia ni Cristo Day                         → INC Day         (7)
+   National Heroes' Day                          → Heroes Day      (10)
+   Mid-Autumn Festival                           → Mid-Autumn      (10)
+   Chinese New Year                              → Chinese NY      (10)
+   Constitution Day                              → Constitution    (12)
+   Lantern Festival                              → Lantern Fest    (12)
+   Independence Day                              → Indep. Day      (10)
+   Islamic New Year                              → Islamic NY      (10)
+   Ninoy Aquino Day                              → Aquino Day      (10)
+   Maundy Thursday                               → Maundy Thursday (15)
+   Easter Saturday                               → Easter Saturday (15)
+   All Saints' Day                               → All Saints'     (11)
+   New Year's Day                                → New Year        (8)
+   All Souls' Day                                → All Souls' Day  (14)
+   New Year's Eve                                → New Year's Eve  (14)
+   Easter Sunday                                 → Easter Sun      (10)
+   Lapu-Lapu Day                                 → Lapu-Lapu Day   (13)
+   Bonifacio Day                                 → Bonifacio Day   (13)
+   Christmas Eve                                 → Christmas Eve   (13)
+   Christmas Day                                 → Christmas       (9)
+   Day of Valor                                  → Day of Valor    (12)
+   Good Friday                                   → Good Friday     (11)
+   Labour Day                                    → Labour Day      (10)
+   Rizal Day                                     → Rizal Day       (9)
+
+==========================================================================================
+Total: 31 holidays
+✅ All holidays fit within 15 chars

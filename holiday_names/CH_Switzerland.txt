@@ -1,0 +1,23 @@
+Holiday Names for Switzerland (CH)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Eidg. Dank-, Buss- und Bettag                 → Prayer Day      (10)
+   Gründonnerstag                                → Maundy Thurs    (12)
+   Pfingstsonntag                                → Whit Sunday     (11)
+   Bundesfeiertag                                → National Day    (12)
+   Pfingstmontag                                 → Whit Monday     (11)
+   Weihnachtstag                                 → Christmas Day   (13)
+   Ostersonntag                                  → Easter Sunday   (13)
+   Ostermontag                                   → Easter Monday   (13)
+   Stephanstag                                   → St. Stephen's   (13)
+   Karfreitag                                    → Good Friday     (11)
+   Muttertag                                     → Mother's Day    (12)
+   Auffahrt                                      → Ascension Day   (13)
+   Vätertag                                      → Father's Day    (12)
+   Neujahr                                       → New Year        (8)
+
+==========================================================================================
+Total: 14 holidays
+✅ All holidays fit within 15 chars

@@ -1,0 +1,24 @@
+Holiday Names for Denmark (DK)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Kristi Himmelfartsdag                         → Ascension Day   (13)
+   Anden påskedag                                → Easter Monday   (13)
+   Anden Pinsedag                                → Whit Monday     (11)
+   Anden Juledag                                 → Boxing Day      (10)
+   Grundlovsdag                                  → Const. Day      (10)
+   Skærtorsdag                                   → Maundy Thurs    (12)
+   Påskesøndag                                   → Easter Sunday   (13)
+   Langfredag                                    → Good Friday     (11)
+   Fastelavn                                     → Fastelavns      (10)
+   Juleaften                                     → Christmas Eve   (13)
+   Mors Dag                                      → Mother's Day    (12)
+   Pinsedag                                      → Whit Sunday     (11)
+   Juledag                                       → Christmas Day   (13)
+   1. maj                                        → Labour Day      (10)
+   Nytår                                         → New Year        (8)
+
+==========================================================================================
+Total: 15 holidays
+✅ All holidays fit within 15 chars

@@ -3,31 +3,44 @@ import Head from 'next/head';
 import { useState } from 'react';
 import Link from 'next/link';
 
-// Popular countries for holiday selection (same as builder)
+// Popular countries for holiday selection - sorted alphabetically
 const holidayCountries = [
   { code: '', name: 'None (No holidays)' },
-  { code: 'US', name: 'United States' },
-  { code: 'GB', name: 'United Kingdom' },
-  { code: 'CA', name: 'Canada' },
   { code: 'AU', name: 'Australia' },
-  { code: 'JP', name: 'Japan' },
-  { code: 'KR', name: 'South Korea' },
-  { code: 'DE', name: 'Germany' },
-  { code: 'FR', name: 'France' },
-  { code: 'IT', name: 'Italy' },
-  { code: 'ES', name: 'Spain' },
+  { code: 'AT', name: 'Austria' },
+  { code: 'BE', name: 'Belgium' },
   { code: 'BR', name: 'Brazil' },
-  { code: 'MX', name: 'Mexico' },
-  { code: 'IN', name: 'India' },
+  { code: 'CA', name: 'Canada' },
   { code: 'CN', name: 'China' },
-  { code: 'TW', name: 'Taiwan' },
+  { code: 'CZ', name: 'Czech Republic' },
+  { code: 'DK', name: 'Denmark' },
+  { code: 'FR', name: 'France' },
+  { code: 'DE', name: 'Germany' },
+  { code: 'GR', name: 'Greece' },
   { code: 'HK', name: 'Hong Kong' },
-  { code: 'SG', name: 'Singapore' },
-  { code: 'NZ', name: 'New Zealand' },
+  { code: 'IN', name: 'India' },
+  { code: 'ID', name: 'Indonesia' },
+  { code: 'IE', name: 'Ireland' },
+  { code: 'IT', name: 'Italy' },
+  { code: 'JP', name: 'Japan' },
+  { code: 'MX', name: 'Mexico' },
   { code: 'NL', name: 'Netherlands' },
-  { code: 'SE', name: 'Sweden' },
+  { code: 'NZ', name: 'New Zealand' },
   { code: 'NO', name: 'Norway' },
   { code: 'PH', name: 'Philippines' },
+  { code: 'PL', name: 'Poland' },
+  { code: 'PT', name: 'Portugal' },
+  { code: 'RO', name: 'Romania' },
+  { code: 'SA', name: 'Saudi Arabia' },
+  { code: 'SG', name: 'Singapore' },
+  { code: 'KR', name: 'South Korea' },
+  { code: 'ES', name: 'Spain' },
+  { code: 'SE', name: 'Sweden' },
+  { code: 'CH', name: 'Switzerland' },
+  { code: 'TW', name: 'Taiwan' },
+  { code: 'AE', name: 'United Arab Emirates' },
+  { code: 'GB', name: 'United Kingdom' },
+  { code: 'US', name: 'United States' },
 ];
 
 type PlannerType = 'classic' | 'veho' | 'vertical';
@@ -50,6 +63,7 @@ export default function Home() {
   const [year, setYear] = useState('2026');
   const [startDay, setStartDay] = useState('Monday');
   const [holidayCountry, setHolidayCountry] = useState('');
+  const [showObservance, setShowObservance] = useState(true); // Include Father's Day, Mother's Day, etc.
   const [loading, setLoading] = useState(false);
 
   const handleGenerate = async () => {
@@ -71,7 +85,7 @@ export default function Home() {
             countryCode: holidayCountry,
             showPublic: true,
             showBank: true,
-            showObservance: false
+            showObservance: showObservance
           } : undefined
         }),
       });
@@ -127,10 +141,10 @@ export default function Home() {
                 onClick={() => setSelectedPlanner(planner.id)}
                 disabled={!planner.available}
                 className={`relative p-6 rounded-xl border-2 transition-all duration-200 text-left ${selectedPlanner === planner.id
-                    ? 'border-indigo-500 bg-indigo-500/10 shadow-lg shadow-indigo-500/20'
-                    : planner.available
-                      ? 'border-slate-700 bg-slate-800/50 hover:border-slate-600 hover:bg-slate-800'
-                      : 'border-slate-800 bg-slate-900/50 opacity-60 cursor-not-allowed'
+                  ? 'border-indigo-500 bg-indigo-500/10 shadow-lg shadow-indigo-500/20'
+                  : planner.available
+                    ? 'border-slate-700 bg-slate-800/50 hover:border-slate-600 hover:bg-slate-800'
+                    : 'border-slate-800 bg-slate-900/50 opacity-60 cursor-not-allowed'
                   }`}
               >
                 <div className="flex items-center justify-between mb-2">
@@ -205,6 +219,28 @@ export default function Home() {
               </select>
             </div>
           </div>
+
+          {/* Observance Toggle - only show when a country is selected */}
+          {holidayCountry && (
+            <div className="mt-6 pt-4 border-t border-slate-700">
+              <label className="flex items-center gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  checked={showObservance}
+                  onChange={(e) => setShowObservance(e.target.checked)}
+                  className="w-5 h-5 rounded border-slate-600 bg-slate-900 text-indigo-500 focus:ring-indigo-500 focus:ring-offset-0 cursor-pointer"
+                />
+                <div>
+                  <span className="text-sm text-white group-hover:text-indigo-300 transition-colors">
+                    Include Cultural Days
+                  </span>
+                  <p className="text-xs text-slate-500">
+                    Valentine's, Mother's/Father's Day (not official holidays)
+                  </p>
+                </div>
+              </label>
+            </div>
+          )}
         </div>
 
         {/* Generate Button */}
@@ -213,8 +249,8 @@ export default function Home() {
             onClick={handleGenerate}
             disabled={loading || !plannerTypes.find(p => p.id === selectedPlanner)?.available}
             className={`px-12 py-4 rounded-xl text-lg font-semibold transition-all duration-200 ${loading
-                ? 'bg-slate-700 text-slate-400 cursor-wait'
-                : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transform hover:-translate-y-0.5'
+              ? 'bg-slate-700 text-slate-400 cursor-wait'
+              : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transform hover:-translate-y-0.5'
               }`}
           >
             {loading ? (

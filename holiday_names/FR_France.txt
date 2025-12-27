@@ -1,0 +1,22 @@
+Holiday Names for France (FR)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Fête Nationale de la France                   → Bastille Day    (12)
+   Fête de la Victoire 1945                      → VE Day          (6)
+   Lundi de Pentecôte                            → Whit Monday     (11)
+   Lundi de Pâques                               → Easter Monday   (13)
+   Fête du travail                               → Labour Day      (10)
+   Fête des Mères                                → Mother's Day    (12)
+   Armistice 1918                                → Armistice Day   (13)
+   Assomption                                    → Assumption      (10)
+   Nouvel An                                     → New Year        (8)
+   Ascension                                     → Ascension Day   (13)
+   Pentecôte                                     → Whit Sunday     (11)
+   Toussaint                                     → All Saints'     (11)
+   Noël                                          → Christmas       (9)
+
+==========================================================================================
+Total: 13 holidays
+✅ All holidays fit within 15 chars

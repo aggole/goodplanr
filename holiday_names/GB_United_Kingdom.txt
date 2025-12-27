@@ -1,0 +1,21 @@
+Holiday Names for United Kingdom (GB)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Christmas Day (substitute day)                → Christmas (obs.) (16)
+   Boxing Day (substitute day)                   → Boxing Day (obs.) (17)
+   Early May bank holiday                        → Early May Bank  (14)
+   Spring bank holiday                           → Spring Bank     (11)
+   New Year's Day                                → New Year        (8)
+   Easter Sunday                                 → Easter Sun      (10)
+   Easter Monday                                 → Easter Mon      (10)
+   Christmas Day                                 → Christmas       (9)
+   Mother's Day                                  → Mother's        (8)
+   Father's Day                                  → Father's        (8)
+   Good Friday                                   → Good Friday     (11)
+   Boxing Day                                    → Boxing Day      (10)
+
+==========================================================================================
+Total: 12 holidays
+✅ All holidays fit within 15 chars

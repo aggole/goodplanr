@@ -1,0 +1,31 @@
+Holiday Names for Romania (RO)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Ziua Românilor de Pretutindeni, Ziua Românulu → Diaspora Day    (12)
+   Ziua Unirii Principatelor Române              → Union Day RO    (12)
+   Ziua națională, Ziua Marii Uniri              → Great Union     (11)
+   Adormirea Maicii Domnului                     → Assumption      (10)
+   Ziua drapelului national                      → Flag Day RO     (11)
+   Ziua Imnului național                         → Anthem Day      (10)
+   A doua zi de Rusalii                          → Whit Monday     (11)
+   A doua zi de Crăciun                          → Boxing Day      (10)
+   A doua zi de Pasti                            → Easter Monday   (13)
+   Ziua Constituției                             → Const. Day RO   (13)
+   Ziua Copilului                                → Children's Day  (14)
+   Sfântul Andrei                                → St. Andrew's    (12)
+   Vinerea Mare                                  → Good Friday     (11)
+   Ziua Eroilor                                  → Heroes Day      (10)
+   Sfântul Ion                                   → St. John's      (10)
+   Ziua muncii                                   → Labour Day      (10)
+   Ziua Mamei                                    → Mother's Day    (12)
+   Bobotează                                     → Epiphany        (8)
+   Rusaliile                                     → Whit Sunday     (11)
+   Crăciunul                                     → Christmas       (9)
+   Anul nou                                      → New Year        (8)
+   Paștele                                       → Easter          (6)
+
+==========================================================================================
+Total: 22 holidays
+✅ All holidays fit within 15 chars

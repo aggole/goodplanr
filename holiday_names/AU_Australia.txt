@@ -1,0 +1,22 @@
+Holiday Names for Australia (AU)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Christmas Day (substitute day)                → Christmas (obs.) (16)
+   Boxing Day (substitute day)                   → Boxing Day (obs.) (17)
+   Easter Saturday                               → Easter Saturday (15)
+   New Year's Day                                → New Year        (8)
+   Australia Day                                 → Australia Day   (13)
+   Easter Sunday                                 → Easter Sun      (10)
+   Easter Monday                                 → Easter Mon      (10)
+   Christmas Day                                 → Christmas       (9)
+   Mother's Day                                  → Mother's        (8)
+   Father's Day                                  → Father's        (8)
+   Good Friday                                   → Good Friday     (11)
+   Boxing Day                                    → Boxing Day      (10)
+   Anzac Day                                     → Anzac Day       (9)
+
+==========================================================================================
+Total: 13 holidays
+✅ All holidays fit within 15 chars

@@ -2,7 +2,7 @@
 import { PDFDocument, PDFPage, PDFFont, rgb, StandardFonts, PDFName, PDFRef, degrees, PDFString } from 'pdf-lib';
 import * as fs from 'fs';
 import * as path from 'path';
-import { getHolidaysForYear, isHoliday, Holiday, HolidaySettings } from './holidays';
+import { getHolidaysForYear, isHoliday, Holiday, HolidaySettings, getHolidayDisplayName } from './holidays';
 
 // --- SHARED INTERFACES ---
 
@@ -89,6 +89,9 @@ export async function generateCustomPlannerPdf(options: CustomPlannerOptions): P
     const thinFont = fs.existsSync(path.join(fontsDir, 'Roboto-Thin.ttf'))
         ? await doc.embedFont(fs.readFileSync(path.join(fontsDir, 'Roboto-Thin.ttf')))
         : lightFont;
+    const mediumFont = fs.existsSync(path.join(fontsDir, 'Roboto-Medium.ttf'))
+        ? await doc.embedFont(fs.readFileSync(path.join(fontsDir, 'Roboto-Medium.ttf')))
+        : regularFont;
 
     // Load CJK fonts for holiday names (Japanese, Korean, Simplified/Traditional Chinese)
     let notoSansJP = boldFont; // Fallback to bold
@@ -138,6 +141,7 @@ export async function generateCustomPlannerPdf(options: CustomPlannerOptions): P
         boldFont,
         lightFont,
         thinFont,
+        mediumFont,
         notoSansJP, // Japanese font for holiday labels
         notoSansKR, // Korean font for holiday labels
         notoSansSC, // Simplified Chinese font for China
@@ -159,6 +163,7 @@ export async function generateCustomPlannerPdf(options: CustomPlannerOptions): P
         nextJanWeeklyPageIndices: [] as number[],
         prevDecDailyPageIndices: [] as number[],
         nextJanDailyPageIndices: [] as number[],
+        nextJanWeekOffset: 0, // Week offset for Next Jan (0 or 1 if Week 1 is skipped)
         prevMonthPageIndex: -1, // Track Prev Dec
         nextMonthPageIndex: -1, // Track Next Jan
         links: [] as any[], // Collect links to apply later
@@ -240,10 +245,10 @@ export async function generateCustomPlannerPdf(options: CustomPlannerOptions): P
         nextYearFirstWeekStart = new Date(Date.UTC(context.year + 1, 0, 1 - diff));
     }
 
-    // If Main Year Last Week Start == Next Year First Week Start -> Duplicate!
-    if (lastWeekStart.getTime() === nextYearFirstWeekStart.getTime()) {
-        context.totalWeeks--;
-    }
+    // NOTE: Do NOT decrement totalWeeks here even if overlap detected.
+    // If Main Year's last week and Next Year's first week overlap,
+    // the Next Jan section handles it by skipping Week 1 (nextJanWeekOffset = 1).
+    // Decrementing totalWeeks here would cause the week to be removed from BOTH sections.
 
     // PRE-CALCULATE PAGE INDICES
     // Pages are added in order: Yearly -> Overview -> Monthly -> Weekly -> Daily
@@ -354,7 +359,28 @@ export async function generateCustomPlannerPdf(options: CustomPlannerOptions): P
 
         // Next Jan Weeks
         if (options.scope === 'full') {
-            const nextJanWeeks = getMonthWeekCount(context.year + 1, 0, context.startDay);
+            let nextJanWeeks = getMonthWeekCount(context.year + 1, 0, context.startDay);
+            let nextJanWeekOffset = 0; // How many weeks to skip (0 or 1)
+
+            // Fix: Check for overlap with Main Year's last week
+            // If Week 1 of Next Year starts in December of Main Year,
+            // it's already rendered as Main Year's last week - skip it.
+            // Use the SAME "Week containing Jan 1" method that the planner uses
+            const nextJan1 = new Date(context.year + 1, 0, 1);
+            const nextJan1Day = nextJan1.getDay(); // 0=Sun, 1=Mon...
+            const targetDay = context.startDay === 'Monday' ? 1 : 0;
+            const diff = (nextJan1Day - targetDay + 7) % 7;
+
+            // Week 1 of next year starts this many days before Jan 1
+            const nextYearWeek1Start = new Date(context.year + 1, 0, 1 - diff);
+
+            // If Week 1 of Next Year starts in December of Main Year, skip it
+            if (nextYearWeek1Start.getFullYear() === context.year && nextYearWeek1Start.getMonth() === 11) {
+                nextJanWeeks--;
+                nextJanWeekOffset = 1; // Start from Week 2 instead of Week 1
+            }
+
+            context.nextJanWeekOffset = nextJanWeekOffset; // Store for rendering
             for (let i = 0; i < nextJanWeeks; i++) context.nextJanWeeklyPageIndices.push(currentPageIndex + i);
             currentPageIndex += nextJanWeeks;
         }
@@ -593,12 +619,14 @@ export async function generateCustomPlannerPdf(options: CustomPlannerOptions): P
                 isNextJan: true,
                 skipDailyLinks: false
             };
-            // Jan 1 is Week 1. So index starts at 0.
+            // Use nextJanWeekOffset to skip Week 1 if it's part of main year
+            const weekOffset = context.nextJanWeekOffset || 0;
             for (let i = 0; i < njWeeks; i++) {
                 const [page] = await doc.copyPages(template, [0]);
                 doc.addPage(page);
-                renderPlaceholders(page, context.placeholders.weekly, i, njCtx, 'weekly');
-                if (context.placeholders.global) renderPlaceholders(page, context.placeholders.global, i, njCtx, 'weekly');
+                // Pass i + weekOffset so Week 2+ is rendered when Week 1 is skipped
+                renderPlaceholders(page, context.placeholders.weekly, i + weekOffset, njCtx, 'weekly');
+                if (context.placeholders.global) renderPlaceholders(page, context.placeholders.global, i + weekOffset, njCtx, 'weekly');
             }
         }
     }
@@ -720,7 +748,7 @@ function renderPlaceholders(
     ctx: any,
     scope: 'yearly' | 'overview' | 'monthly' | 'weekly' | 'daily' | 'extras'
 ) {
-    const { year, startDay, font: regularFont, boldFont, lightFont, thinFont } = ctx;
+    const { year, startDay, font: regularFont, boldFont, lightFont, thinFont, mediumFont } = ctx;
     const height = page.getHeight();
 
     placeholders.forEach(ph => {
@@ -1015,6 +1043,44 @@ function renderPlaceholders(
             }
         }
 
+        // --- MONTH_NAME (Overview page - 6 month names in a row) ---
+        if (ph.type === 'MONTH_NAME' && scope === 'overview') {
+            const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+            // Determine starting month based on label (1 = Jan-Jun, 7 = Jul-Dec) or monthOffset
+            let startMonth = 0;
+            if (ph.label && !isNaN(parseInt(ph.label))) {
+                startMonth = parseInt(ph.label) - 1; // Label "1" = Jan (index 0), "7" = Jul (index 6)
+            }
+            if (ctx.monthOffset) {
+                startMonth += ctx.monthOffset;
+            }
+
+            const grid = ph.grid || { cols: 6, rows: 1, width: 80, height: 20, paddingX: 5, paddingY: 0 };
+
+            for (let i = 0; i < grid.cols; i++) {
+                const monthIndex = (startMonth + i) % 12;
+                const monthName = months[monthIndex];
+
+                const cellX = pdfX + (i * (grid.width + grid.paddingX));
+                const cellY = pdfY;
+
+                // Center text in cell
+                const textWidth = fontToUse.widthOfTextAtSize(monthName, fontSize);
+                const textX = cellX + (grid.width - textWidth) / 2;
+                const textY = cellY - fontSize + 2;
+
+                drawTextWithKerning(page, monthName, {
+                    x: textX,
+                    y: textY,
+                    size: fontSize,
+                    font: fontToUse,
+                    color,
+                    letterSpacing
+                });
+            }
+        }
+
         // --- MONTH LABEL ---
         if (ph.type === 'MONTH_LABEL') {
             if (scope === 'monthly') {
@@ -1272,32 +1338,8 @@ function renderPlaceholders(
                         holidayFont = boldFont;
                     }
 
-                    // Use original holiday name (with CJK support via Noto Sans)
-                    let holidayName = holiday.name.trim().toUpperCase();
-
-                    // Abbreviations for long holiday names (English)
-                    const abbreviations: { [key: string]: string } = {
-                        "MARTIN LUTHER KING JR. DAY": "MLK DAY",
-                        "MARTIN LUTHER KING, JR. DAY": "MLK DAY",
-                        "MARTIN LUTHER KING DAY": "MLK DAY",
-                        "PRESIDENTS' DAY": "PRESIDENTS DAY",
-                        "PRESIDENT'S DAY": "PRESIDENTS DAY",
-                        "WASHINGTON'S BIRTHDAY": "PRESIDENTS DAY",
-                        "THANKSGIVING DAY": "THANKSGIVING",
-                        "CHRISTMAS DAY": "CHRISTMAS",
-                        "NEW YEAR'S DAY": "NEW YEAR",
-                        "INDIGENOUS PEOPLES' DAY": "INDIGENOUS DAY",
-                        "JUNETEENTH NATIONAL INDEPENDENCE DAY": "JUNETEENTH",
-                        "RESPECT FOR THE AGED DAY": "SENIORS DAY",
-                        "AUTUMNAL EQUINOX DAY": "EQUINOX",
-                        "CONSTITUTION MEMORIAL DAY": "CONSTITUTION",
-                        "LABOUR THANKSGIVING DAY": "LABOR THANKS",
-                    };
-
-                    // Apply abbreviation if available
-                    if (abbreviations[holidayName]) {
-                        holidayName = abbreviations[holidayName];
-                    }
+                    // Use centralized abbreviation function
+                    let holidayName = getHolidayDisplayName(holiday.name).toUpperCase();
 
                     if (holidayName.length > 0) {
                         const pillH = ph.grid?.height || 20;
@@ -1507,79 +1549,39 @@ function renderPlaceholders(
                 // Wait, renderPlaceholders loop 'i' (index) corresponds to 0-based week index of the year.
                 // We need to find the Start Date (Sun/Mon) of that week.
 
-                const jan1 = new Date(Date.UTC(year, 0, 1)); // UTC Midnight Jan 1
-                const jan1Day = jan1.getUTCDay(); // 0-6
+                const jan1 = new Date(year, 0, 1);
+                const jan1Day = jan1.getDay(); // 0-6
 
-                // If Monday Start:
-                // Week 1 is the first week with >= 4 days? Or whatever logic `getWeekNumber` uses?
-                // `getWeekNumber` uses ISO (Mon start) or simple "Week containing Jan 1" (Sun start).
-
+                // Use planner's "Week containing Jan 1" method (NOT ISO week)
                 let firstWeekStart;
                 if (startDay === 'Monday') {
-                    // ISO Week 1 starts on the Monday of the week with Jan 4th.
-                    // Or approx: Monday closest to Jan 1?
-                    // Let's reverse `getWeekNumber` logic or use a simpler approximation if defined.
-                    // Robust way:
-                    // ISO Week 1 starts on: Monday of Jan 4's week.
-                    // Calc Jan 4
-                    const jan4 = new Date(Date.UTC(year, 0, 4));
-                    const jan4Day = jan4.getUTCDay(); // 0(Sun)..6(Sat)
-                    const diffToMon = (jan4Day + 6) % 7; // Mon(1)->0, Tue(2)->1
-                    firstWeekStart = new Date(Date.UTC(year, 0, 4 - diffToMon));
+                    // Find Monday of week containing Jan 1
+                    const targetDay = 1;
+                    const diff = (jan1Day - targetDay + 7) % 7;
+                    firstWeekStart = new Date(year, 0, 1 - diff);
                 } else {
                     // Sunday Start (US)
                     // Week 1 contains Jan 1.
                     // Start is the Sunday of that week.
                     const diffToSun = jan1Day; // Sun(0)->0, Mon(1)->1...
-                    firstWeekStart = new Date(Date.UTC(year, 0, 1 - diffToSun));
+                    firstWeekStart = new Date(year, 0, 1 - diffToSun);
                 }
 
                 const weekDate = new Date(firstWeekStart);
-                // Add index*7 days in UTC
-                weekDate.setUTCDate(weekDate.getUTCDate() + (index * 7));
+                // Add index*7 days using local methods
+                weekDate.setDate(weekDate.getDate() + (index * 7));
 
-                // weekDate is now the Start Date (in UTC) of the week.
+                // weekDate is now the Start Date (local) of the week.
 
                 // Use Middle of week to decide "Current Month" (so Week spanning Jan/Feb belongs to major month)
                 const middleDate = new Date(weekDate);
-                middleDate.setUTCDate(middleDate.getUTCDate() + 3);
+                middleDate.setDate(middleDate.getDate() + 3);
 
-                targetMonthIndex = middleDate.getUTCMonth();
-                targetYear = middleDate.getUTCFullYear();
+                targetMonthIndex = middleDate.getMonth();
+                targetYear = middleDate.getFullYear();
 
-                // Use LOCAL equivalent for highlightDate passed to renderMiniItem if renderMiniItem expects local matching?
-                // renderMiniItem highlight logic:
-                // "const dDate = new Date(year, monthIndex, d);" (Local)
-                // "const dWeek = getWeekNumber(dDate, startDay);"
-                // "if (dWeek === highlightWeekNum)..."
-
-                // Wait, if I pass a UTC date as highlightDate, `getWeekNumber(highlightDate)` will use `getUTCFullYear` etc.
-                // which works perfectly.
-                // BUT `dDate` inside renderMiniItem is LOCAL.
-                // `getWeekNumber(dDate)` will read local components as UTC?
-                // No, getWeekNumber creates `new Date(Date.UTC(date.getUTCFullYear(), ...))`
-                // If `dDate` is Local (e.g. 2026-07-19 00:00 Local), `getUTCFullYear` might be 2026.
-
-                // CRITICAL: `getWeekNumber` implementation uses `date.getUTCFullYear()`.
-                // If I pass Local Date, it reads UTC components.
-                // If Local is GMT+9, 00:00 Local is 15:00 Prev Day UTC.
-                // So `getWeekNumber` sees Prev Day!
-                // This causes mismatch if I calculate `highlightDate` correctly here but `dDate` shifts.
-
-                // FIX: Pass `highlightDate` as a date that represents the start of the week.
-                // And in `renderMiniItem`, use the Robust Range Check (diffDays) I planned earlier.
-                // For Range Check to work, `dDate` and `highlightDate` must be comparable (same Timezone basis).
-                // `dDate` is constructed as Local `new Date(year, m, d)`.
-                // So I should construct `highlightDate` as Local here too.
-
-                // Convert my accurate UTC `weekDate` to Local equivalent (same calendar numbers).
-                highlightDate = new Date(weekDate.getUTCFullYear(), weekDate.getUTCMonth(), weekDate.getUTCDate());
-
-                // Re-calculate targetMonth/Year based on this Local date to be consistent.
-                const midLocal = new Date(highlightDate);
-                midLocal.setDate(midLocal.getDate() + 3);
-                targetMonthIndex = midLocal.getMonth();
-                targetYear = midLocal.getFullYear();
+                // weekDate is already local, use it directly for highlight
+                highlightDate = weekDate;
             }
 
             blueprint.forEach((item: PlaceholderConfig) => {
@@ -1696,6 +1698,10 @@ function renderPlaceholders(
                 const grid = ph.grid;
                 const count = Math.min(tokens.length, grid.cols * grid.rows);
 
+                // Determine Sunday index for week headers
+                const isWeekHeader = ph.label.includes('%week_header_full%') || ph.label.includes('%week_header_short%');
+                const sundayIndex = startDay === 'Monday' ? 6 : 0;
+
                 for (let i = 0; i < count; i++) {
                     const token = tokens[i];
                     const r = Math.floor(i / grid.cols);
@@ -1704,18 +1710,21 @@ function renderPlaceholders(
                     const cellX = pdfX + (c * (grid.width + grid.paddingX));
                     const cellY = pdfY - (r * (grid.height + grid.paddingY));
 
+                    // Use medium font for Sunday in week headers
+                    const tokenFont = (isWeekHeader && i === sundayIndex) ? mediumFont : fontToUse;
+
                     // Draw Token Centered in Cell
                     let drawX = cellX;
                     // Default to center align for grid cells usually
                     // Or follow ph.style.align logic relative to cell width
 
                     // Simple center alignment in cell
-                    const textWidth = fontToUse.widthOfTextAtSize(token, fontSize) + ((token.length - 1) * letterSpacing);
+                    const textWidth = tokenFont.widthOfTextAtSize(token, fontSize) + ((token.length - 1) * letterSpacing);
                     drawX = cellX + (grid.width - textWidth) / 2;
                     // Y center
                     const drawY = cellY - (grid.height / 2) - (fontSize / 3); // Approx vertical center
 
-                    drawTextWithKerning(page, token, { x: drawX, y: drawY, size: fontSize, font: fontToUse, color, letterSpacing });
+                    drawTextWithKerning(page, token, { x: drawX, y: drawY, size: fontSize, font: tokenFont, color, letterSpacing });
                 }
 
             } else {
@@ -1852,7 +1861,9 @@ function renderPlaceholders(
                     }
                 }
 
-                drawTextWithKerning(page, dateStr, { x: textX, y: cellY - (grid.height / 2), size: fontSize, font: fontToUse, color: cellColor, letterSpacing });
+                // Use medium font for Sundays (to make them stand out)
+                const dateFontToUse = cellDate.getDay() === 0 ? mediumFont : fontToUse;
+                drawTextWithKerning(page, dateStr, { x: textX, y: cellY - (grid.height / 2), size: fontSize, font: dateFontToUse, color: cellColor, letterSpacing });
 
                 // Link to Daily Page
                 if (!ctx.skipDailyLinks) {
@@ -1936,48 +1947,22 @@ function renderPlaceholders(
                     }
                 }
 
+                // Use medium font for Sundays (to make them stand out)
+                const dateFontToUse = cellDate.getDay() === 0 ? mediumFont : fontToUse;
+
                 drawTextWithKerning(page, dateText, {
                     x: textX,
                     y: cellY - 10,
                     size: fontSize,
-                    font: fontToUse,
+                    font: dateFontToUse,
                     color: dateColor,
                     letterSpacing
                 });
 
                 // Draw holiday label below date if holidayOffsetY is set
                 if (holidayForLabel && grid.holidayOffsetY) {
-                    // Abbreviations for long holiday names (matches daily page format)
-                    const abbreviations: { [key: string]: string } = {
-                        "MARTIN LUTHER KING JR. DAY": "MLK DAY",
-                        "MARTIN LUTHER KING, JR. DAY": "MLK DAY",
-                        "MARTIN LUTHER KING DAY": "MLK DAY",
-                        "PRESIDENTS' DAY": "PRESIDENTS DAY",
-                        "PRESIDENT'S DAY": "PRESIDENTS DAY",
-                        "WASHINGTON'S BIRTHDAY": "PRESIDENTS DAY",
-                        "THANKSGIVING DAY": "THANKSGIVING",
-                        "CHRISTMAS DAY": "CHRISTMAS",
-                        "NEW YEAR'S DAY": "NEW YEAR",
-                        "INDIGENOUS PEOPLES' DAY": "INDIGENOUS DAY",
-                        "JUNETEENTH NATIONAL INDEPENDENCE DAY": "JUNETEENTH",
-                        "INDEPENDENCE DAY": "INDEPENDENCE",
-                        "LABOR DAY": "LABOR DAY",
-                        "MEMORIAL DAY": "MEMORIAL DAY",
-                        "VETERANS DAY": "VETERANS DAY",
-                        "COLUMBUS DAY": "COLUMBUS DAY",
-                        "GOOD FRIDAY": "GOOD FRIDAY",
-                        "EASTER MONDAY": "EASTER",
-                        "BOXING DAY": "BOXING DAY",
-                        "RESPECT FOR THE AGED DAY": "SENIORS DAY",
-                        "AUTUMNAL EQUINOX DAY": "EQUINOX",
-                        "CONSTITUTION MEMORIAL DAY": "CONSTITUTION",
-                        "LABOUR THANKSGIVING DAY": "LABOR THANKS",
-                    };
-
-                    let holidayName = holidayForLabel.name.trim().toUpperCase();
-                    if (abbreviations[holidayName]) {
-                        holidayName = abbreviations[holidayName];
-                    }
+                    // Use centralized holiday display name shortening
+                    let holidayName = getHolidayDisplayName(holidayForLabel.name).toUpperCase();
 
                     // Select CJK font
                     let holidayFont = boldFont;
@@ -2106,7 +2091,7 @@ function renderPlaceholders(
                             isCJK = true;
                         }
 
-                        const holidayName = holiday.name.trim().toUpperCase();
+                        const holidayName = getHolidayDisplayName(holiday.name).toUpperCase();
                         const cellX = pdfX + (i * (grid.width + grid.paddingX));
                         const cellY = pdfY - grid.height;
                         const pillH = grid.height;
@@ -2174,6 +2159,11 @@ function renderPlaceholders(
                 targetMonth = parsed - 1;
             }
 
+            // Apply Month Offset for Multi-Page Overview (e.g. Page 2 is +6 months)
+            if (targetMonth >= 0 && ctx.monthOffset) {
+                targetMonth += ctx.monthOffset;
+            }
+
             if (targetMonth >= 0) {
                 // Draw the mini calendar for targetMonth
                 const m = targetMonth;
@@ -2228,13 +2218,16 @@ function renderPlaceholders(
                             letterSpacing
                         });
 
-                        // Link to daily? Maybe too small. Link to Month?
-                        ctx.links.push({
-                            pageIndex: ctx.doc.getPageCount() - 1,
-                            rect: [cellX, cellY - grid.height, cellX + grid.width, cellY],
-                            targetType: 'MONTH',
-                            targetId: m
-                        });
+                        // Link to Daily Page
+                        const dayOfYear = getDayOfYear(cellDate);
+                        if (dayOfYear >= 0) {
+                            ctx.links.push({
+                                pageIndex: ctx.doc.getPageCount() - 1,
+                                rect: [cellX, cellY - grid.height, cellX + grid.width, cellY],
+                                targetType: 'DAY',
+                                targetId: dayOfYear
+                            });
+                        }
                     }
                 }
             }

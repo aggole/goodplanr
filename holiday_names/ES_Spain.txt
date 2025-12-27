@@ -1,0 +1,28 @@
+Holiday Names for Spain (ES)
+==========================================================================================
+
+Original Name                                    → Display Name        (Len)
+------------------------------------------------------------------------------------------
+   Día de la Constitución Española (día sustitut → Const. ES (sust.) (17)
+   Fiesta Nacional de España (día sustituto)     → Spain Nat (sust.) (17)
+   Todos los Santos (día sustituto)              → All Saints (sust.) (18)
+   Día de la Constitución Española               → Const. ES       (9)
+   Fiesta Nacional de España                     → Spain Nat       (9)
+   La inmaculada concepción                      → Immaculate C.   (13)
+   Día de los Reyes Magos                        → Epiphany        (8)
+   Día del Trabajador                            → Labour Day      (10)
+   Santiago Apostol                              → St. James'      (10)
+   Todos los Santos                              → All Saints      (10)
+   Día de la Madre                               → Mother's Day    (12)
+   Viernes Santo                                 → Good Friday     (11)
+   Jueves Santo                                  → Maundy Thurs    (12)
+   Pentecostés                                   → Whit Sunday     (11)
+   Año Nuevo                                     → New Year        (8)
+   San José                                      → St. Joseph's    (12)
+   Asunción                                      → Assumption      (10)
+   Navidad                                       → Christmas       (9)
+   Pascua                                        → Easter          (6)
+
+==========================================================================================
+Total: 19 holidays
+✅ All holidays fit within 15 chars
