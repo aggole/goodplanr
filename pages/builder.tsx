@@ -181,6 +181,7 @@ export default function PlannerBuilder() {
     const [numPages, setNumPages] = useState<number>(0);
     const [year, setYear] = useState<number>(2025);
     const [startDay, setStartDay] = useState<'Monday' | 'Sunday'>('Monday');
+
     const [plannerType, setPlannerType] = useState<'classic' | 'veho' | 'vertical'>('classic');
     const pdfWrapperRef = useRef<HTMLDivElement>(null);
     const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -1802,7 +1803,6 @@ export default function PlannerBuilder() {
                     </button>
                 </div>
             </aside>
-
             {/* MAIN AREA */}
             <main className="flex-1 overflow-auto bg-slate-100 flex justify-center p-12 relative" onClick={() => setSelectedId(null)}>
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#4b5563 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
@@ -1863,6 +1863,21 @@ export default function PlannerBuilder() {
                     )}
                 </div>
             </main>
+
+
         </div>
     );
+}
+
+declare global {
+    interface Window {
+        createLemonSqueezy: () => void;
+        LemonSqueezy: {
+            Url: {
+                Open: (url: string) => void;
+                Close: () => void;
+            };
+            Setup: (options: { eventHandler: (event: { event: string }) => void }) => void;
+        };
+    }
 }

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Script from 'next/script';
 import { PlannerLayout } from '@/components/planner-layout';
 
 export default function Home() {
@@ -12,6 +13,17 @@ export default function Home() {
       <main className="px-6 py-12">
         <PlannerLayout />
       </main>
+
+      {/* Lemon Squeezy Script */}
+      <Script
+        src="https://app.lemonsqueezy.com/js/lemon.js"
+        strategy="lazyOnload"
+        onLoad={() => {
+          if ((window as any).createLemonSqueezy) {
+            (window as any).createLemonSqueezy();
+          }
+        }}
+      />
     </div>
   );
 }

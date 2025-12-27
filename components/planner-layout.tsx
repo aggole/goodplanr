@@ -54,6 +54,8 @@ export function PlannerLayout() {
     const [dailyLayout, setDailyLayout] = useState("grid")
     const [loading, setLoading] = useState(false)
     const [previewModal, setPreviewModal] = useState<string | null>(null)
+    const [isPaid, setIsPaid] = useState(false)
+    const [redeemCode, setRedeemCode] = useState("")
 
     // Get preview image based on layout selection
     const getPreviewImage = (type: 'monthly' | 'weekly' | 'daily') => {
@@ -113,6 +115,38 @@ export function PlannerLayout() {
             alert('Error generating planner')
         } finally {
             setLoading(false)
+        }
+    }
+
+    const handlePurchase = () => {
+        // Open Lemon Squeezy Overlay
+        if (typeof window !== 'undefined' && (window as any).LemonSqueezy) {
+            (window as any).LemonSqueezy.Url.Open('https://goodplanr.lemonsqueezy.com/checkout/buy/952fbb0d-c13f-457f-9d4d-811b6ed1e3e8');
+
+            // Listen for payment success
+            (window as any).LemonSqueezy.Setup({
+                eventHandler: (event: any) => {
+                    if (event.event === 'Checkout.Success') {
+                        setIsPaid(true);
+                        (window as any).LemonSqueezy.Url.Close();
+                        // Auto-trigger download
+                        handleGenerate();
+                    }
+                }
+            });
+        } else {
+            alert('Payment system is loading... please wait a moment and try again.');
+        }
+    }
+
+    const handleRedeem = () => {
+        // Simple code verification - In production, verify against your database
+        const code = redeemCode.toUpperCase().trim();
+        if (code === 'PLAN2026' || code === 'VIP-ACCESS') {
+            setIsPaid(true);
+            setRedeemCode('');
+        } else {
+            alert('Invalid access code');
         }
     }
 
@@ -296,24 +330,53 @@ export function PlannerLayout() {
 
 
             {/* Download Button */}
-            <div className="flex justify-center mt-12">
-                <Button
-                    onClick={handleGenerate}
-                    disabled={loading}
-                    className="bg-[#9f5fc7] hover:bg-[#8b4fb0] text-white px-12 py-6 text-lg rounded-full h-auto font-normal"
-                >
-                    {loading ? (
-                        <span className="flex items-center gap-2">
-                            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                            </svg>
-                            Generating...
-                        </span>
-                    ) : (
-                        'Download the Planner'
-                    )}
-                </Button>
+            <div className="flex flex-col items-center gap-4 mt-12">
+                {!isPaid ? (
+                    <>
+                        <Button
+                            onClick={handlePurchase}
+                            className="bg-[#9f5fc7] hover:bg-[#8b4fb0] text-white px-12 py-6 text-lg rounded-full h-auto font-normal"
+                        >
+                            Buy Now
+                        </Button>
+                        <div className="bg-gray-100 p-4 rounded-lg border border-gray-300">
+                            <p className="text-sm text-gray-600 mb-2">Have an access code?</p>
+                            <div className="flex gap-2">
+                                <input
+                                    type="text"
+                                    value={redeemCode}
+                                    onChange={(e) => setRedeemCode(e.target.value)}
+                                    placeholder="Enter code..."
+                                    className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm"
+                                />
+                                <Button
+                                    onClick={handleRedeem}
+                                    className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 text-sm rounded"
+                                >
+                                    Redeem
+                                </Button>
+                            </div>
+                        </div>
+                    </>
+                ) : (
+                    <Button
+                        onClick={handleGenerate}
+                        disabled={loading}
+                        className="bg-[#9f5fc7] hover:bg-[#8b4fb0] text-white px-12 py-6 text-lg rounded-full h-auto font-normal"
+                    >
+                        {loading ? (
+                            <span className="flex items-center gap-2">
+                                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                </svg>
+                                Generating...
+                            </span>
+                        ) : (
+                            'Download the Planner'
+                        )}
+                    </Button>
+                )}
             </div>
 
             {/* Preview Modal */}
