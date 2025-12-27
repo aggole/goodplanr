@@ -44,7 +44,13 @@ export default async function handler(
             dailyLayout: dailyLayout || 'grid', // Default to grid
             config,
             scope: 'full',
-            holidaySettings
+            holidaySettings,
+            extras: {
+                grid: { count: 20 },
+                dot: { count: 20 },
+                line: { count: 20 },
+                blank: { count: 20 }
+            }
         };
 
         console.log('=== PDF GENERATION START ===');
