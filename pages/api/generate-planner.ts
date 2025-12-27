@@ -13,7 +13,7 @@ export default async function handler(
         return;
     }
 
-    const { year, startDay, holidaySettings } = req.body;
+    const { year, startDay, weeklyLayout, dailyLayout, holidaySettings } = req.body;
 
     try {
         // Load the saved config for Classic planner (if exists)
@@ -39,6 +39,8 @@ export default async function handler(
         const options: CustomPlannerOptions = {
             year: parseInt(year),
             startDay: startDay || 'Monday',
+            weeklyLayout: weeklyLayout || 'vertical', // Default to vertical
+            dailyLayout: dailyLayout || 'grid', // Default to grid
             config,
             scope: 'full',
             holidaySettings
