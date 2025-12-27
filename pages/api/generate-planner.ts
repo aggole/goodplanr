@@ -46,10 +46,10 @@ export default async function handler(
             scope: 'full',
             holidaySettings,
             extras: {
-                grid: { count: 20 },
-                dot: { count: 20 },
-                line: { count: 20 },
-                blank: { count: 20 }
+                grid: { count: 1 },
+                dot: { count: 1 },
+                line: { count: 1 },
+                blank: { count: 1 }
             }
         };
 
