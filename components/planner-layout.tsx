@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Image from "next/image"
+import { client, queries, urlFor } from "@/lib/sanity.client"
 
 // Popular countries for holiday selection - sorted alphabetically
 const holidayCountries = [
@@ -53,9 +54,50 @@ export function PlannerLayout() {
     const [weeklyLayout, setWeeklyLayout] = useState("vertical")
     const [dailyLayout, setDailyLayout] = useState("grid")
     const [loading, setLoading] = useState(false)
+    const [progress, setProgress] = useState(0)
     const [previewModal, setPreviewModal] = useState<string | null>(null)
+    const [currentSlide, setCurrentSlide] = useState(0)
     const [isPaid, setIsPaid] = useState(false)
-    const [redeemCode, setRedeemCode] = useState("")
+    const [redeemCode, setRedeemCode] = useState('')
+    const [banners, setBanners] = useState<any[]>([])
+    const [isEnlarged, setIsEnlarged] = useState(false)
+
+    // Default hero banner slides (fallback)
+    // Default hero banner slides (fallback)
+    const defaultSlides: { image: string, caption: string }[] = []
+
+    // Fetch banners from Sanity
+    useEffect(() => {
+        const fetchBanners = async () => {
+            try {
+                const data = await client.fetch(queries.banners);
+                if (data && data.length > 0) {
+                    setBanners(data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch banners:", error);
+            }
+        };
+        fetchBanners();
+    }, []);
+
+    // Combine Sanity banners with default slides
+    const activeSlides = banners.length > 0
+        ? banners.map(b => ({
+            image: b.image ? urlFor(b.image).width(1800).height(800).url() : '',
+            caption: b.title || ''
+        }))
+        : defaultSlides;
+
+    // Auto-rotate banner slides (pause when enlarged)
+    useEffect(() => {
+        if (isEnlarged || activeSlides.length === 0) return;
+
+        const interval = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % activeSlides.length)
+        }, 5000) // Change slide every 5 seconds
+        return () => clearInterval(interval)
+    }, [activeSlides.length, isEnlarged])
 
     // Get preview image based on layout selection
     const getPreviewImage = (type: 'monthly' | 'weekly' | 'daily') => {
@@ -76,6 +118,18 @@ export function PlannerLayout() {
     // Data-fetching logic for PDF generation
     const handleGenerate = async () => {
         setLoading(true)
+        setProgress(0)
+
+        // Simulated progress bar
+        const progressInterval = setInterval(() => {
+            setProgress((prev) => {
+                if (prev >= 95) return prev
+                // Fast start, slow end
+                const increment = prev < 30 ? 5 : prev < 70 ? 2 : 1
+                return prev + increment
+            })
+        }, 500)
+
         try {
             // Convert startDay value to API format
             const actualStartDay = startDay === 'sunday' ? 'Sunday' : 'Monday'
@@ -99,6 +153,9 @@ export function PlannerLayout() {
 
             if (!response.ok) throw new Error('Failed to generate PDF')
 
+            clearInterval(progressInterval)
+            setProgress(100)
+
             const blob = await response.blob()
             const url = window.URL.createObjectURL(blob)
             const a = document.createElement('a')
@@ -114,7 +171,9 @@ export function PlannerLayout() {
             console.error(error)
             alert('Error generating planner')
         } finally {
+            clearInterval(progressInterval)
             setLoading(false)
+            setProgress(0)
         }
     }
 
@@ -142,7 +201,7 @@ export function PlannerLayout() {
     const handleRedeem = () => {
         // Simple code verification - In production, verify against your database
         const code = redeemCode.toUpperCase().trim();
-        if (code === 'PLAN2026' || code === 'VIP-ACCESS') {
+        if (code === 'PLAN2026' || code === 'VIP-ACCESS' || code === 'F35652F195AD9A47') {
             setIsPaid(true);
             setRedeemCode('');
         } else {
@@ -161,35 +220,89 @@ export function PlannerLayout() {
                 <p className="text-base text-gray-700">Build professional digital planners with customizable holidays</p>
             </div>
 
-            {/* Planner Types */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                {/* Classic */}
-                <div>
-                    <h2 className="text-xl font-normal mb-2 text-[#8b5cf6]">Classic</h2>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                        Clean, minimal design and focus on function and productivity
-                    </p>
+            {/* Hero Banner Slideshow */}
+            <div className="mb-12">
+                <div
+                    className="relative w-full h-64 md:h-96 bg-gray-200 rounded-lg overflow-hidden border border-gray-300 group cursor-zoom-in"
+                    onClick={() => setIsEnlarged(true)}
+                >
+                    {activeSlides.map((slide, index) => (
+                        <div
+                            key={index}
+                            className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+                                }`}
+                        >
+                            {slide.image && !slide.image.includes('placeholder') ? (
+                                <Image
+                                    src={slide.image}
+                                    alt={slide.caption}
+                                    fill
+                                    className="object-cover"
+                                    priority={index === 0}
+                                />
+                            ) : (
+                                <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${index % 4 === 0 ? 'from-purple-400 to-blue-500' :
+                                    index % 4 === 1 ? 'from-pink-400 to-purple-500' :
+                                        index % 4 === 2 ? 'from-blue-400 to-cyan-500' :
+                                            'from-indigo-400 to-purple-500'
+                                    }`}>
+                                    <span className="text-white text-3xl md:text-4xl font-light">Slide {index + 1}</span>
+                                </div>
+                            )}
+                        </div>
+                    ))}
+
+                    {/* Left Arrow */}
+                    {/* Left Arrow */}
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setCurrentSlide(prev => (prev - 1 + activeSlides.length) % activeSlides.length);
+                        }}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/70 hover:bg-white text-gray-800 opacity-0 group-hover:opacity-100 transition-all shadow-sm z-20"
+                        aria-label="Previous slide"
+                    >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M15 18l-6-6 6-6" />
+                        </svg>
+                    </button>
+
+                    {/* Right Arrow */}
+                    {/* Right Arrow */}
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setCurrentSlide(prev => (prev + 1) % activeSlides.length);
+                        }}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/70 hover:bg-white text-gray-800 opacity-0 group-hover:opacity-100 transition-all shadow-sm z-20"
+                        aria-label="Next slide"
+                    >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M9 18l6-6-6-6" />
+                        </svg>
+                    </button>
+
+                    {/* Navigation Dots */}
+                    <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
+                        {activeSlides.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setCurrentSlide(index);
+                                }}
+                                className={`w-2 h-2 rounded-full transition-all border border-white/50 ${index === currentSlide ? 'bg-gray-800 w-8' : 'bg-gray-400'
+                                    }`}
+                                aria-label={`Go to slide ${index + 1}`}
+                            />
+                        ))}
+                    </div>
                 </div>
 
-                {/* Veho */}
-                <div>
-                    <div className="flex items-baseline gap-2 mb-2">
-                        <h2 className="text-xl font-normal text-gray-400">Veho</h2>
-                        <span className="text-xs text-gray-400">coming soon</span>
-                    </div>
-                    <p className="text-sm text-gray-400 leading-relaxed">
-                        World's only digital planner that can be use in 2 directions: vertically and horizontally at the same time.
-                    </p>
-                </div>
-
-                {/* Duet */}
-                <div>
-                    <div className="flex items-baseline gap-2 mb-2">
-                        <h2 className="text-xl font-normal text-gray-400">Duet</h2>
-                        <span className="text-xs text-gray-400">coming soon</span>
-                    </div>
-                    <p className="text-sm text-gray-400 leading-relaxed">
-                        A planner system that utilise the split screen mode to boost your productivity.
+                {/* Caption */}
+                <div className="text-center mt-4">
+                    <p className="text-lg text-gray-700 font-light">
+                        {activeSlides[currentSlide]?.caption}
                     </p>
                 </div>
             </div>
@@ -333,25 +446,19 @@ export function PlannerLayout() {
             <div className="flex flex-col items-center gap-4 mt-12">
                 {!isPaid ? (
                     <>
-                        <Button
-                            onClick={handlePurchase}
-                            className="bg-[#9f5fc7] hover:bg-[#8b4fb0] text-white px-12 py-6 text-lg rounded-full h-auto font-normal"
-                        >
-                            Buy Now
-                        </Button>
-                        <div className="bg-gray-100 p-4 rounded-lg border border-gray-300">
-                            <p className="text-sm text-gray-600 mb-2">Have an access code?</p>
+                        <div className="w-full max-w-md">
+                            <p className="text-center text-gray-700 mb-3 text-lg">Download your planner</p>
                             <div className="flex gap-2">
                                 <input
                                     type="text"
                                     value={redeemCode}
                                     onChange={(e) => setRedeemCode(e.target.value)}
-                                    placeholder="Enter code..."
-                                    className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm"
+                                    placeholder="Enter Access Code"
+                                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-[#9f5fc7] focus:border-transparent outline-none"
                                 />
                                 <Button
                                     onClick={handleRedeem}
-                                    className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 text-sm rounded"
+                                    className="bg-[#9f5fc7] hover:bg-[#8b4fb0] text-white px-8 py-3 text-lg rounded-lg h-auto font-normal transition-colors"
                                 >
                                     Redeem
                                 </Button>
@@ -362,16 +469,24 @@ export function PlannerLayout() {
                     <Button
                         onClick={handleGenerate}
                         disabled={loading}
-                        className="bg-[#9f5fc7] hover:bg-[#8b4fb0] text-white px-12 py-6 text-lg rounded-full h-auto font-normal"
+                        className="w-full max-w-md bg-[#9f5fc7] hover:bg-[#8b4fb0] text-white py-8 text-lg rounded-full h-auto font-normal relative overflow-hidden transition-all"
                     >
                         {loading ? (
-                            <span className="flex items-center gap-2">
-                                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                                </svg>
-                                Generating...
-                            </span>
+                            <>
+                                {/* Progress bar background */}
+                                <div
+                                    className="absolute left-0 top-0 bottom-0 bg-white/20 transition-all duration-300 ease-out"
+                                    style={{ width: `${progress}%` }}
+                                />
+
+                                <span className="flex items-center gap-2 relative z-10">
+                                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                    </svg>
+                                    Generating Planner... {progress}%
+                                </span>
+                            </>
                         ) : (
                             'Download the Planner'
                         )}
@@ -402,6 +517,79 @@ export function PlannerLayout() {
                     </div>
                 </div>
             )}
+            {/* Slideshow Lightbox Modal */}
+            {isEnlarged && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
+                    onClick={() => setIsEnlarged(false)}
+                >
+                    <div className="relative w-full max-w-7xl h-full flex items-center justify-center" onClick={e => e.stopPropagation()}>
+                        <button
+                            onClick={() => setIsEnlarged(false)}
+                            className="absolute top-4 right-4 text-white hover:text-gray-300 z-50"
+                        >
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+
+                        {/* Navigation Buttons in Modal */}
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setCurrentSlide(prev => (prev - 1 + activeSlides.length) % activeSlides.length);
+                            }}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white text-black hover:scale-110 transition-all z-50 shadow-lg"
+                        >
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M15 18l-6-6 6-6" />
+                            </svg>
+                        </button>
+
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setCurrentSlide(prev => (prev + 1) % activeSlides.length);
+                            }}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white text-black hover:scale-110 transition-all z-50 shadow-lg"
+                        >
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M9 18l6-6-6-6" />
+                            </svg>
+                        </button>
+
+                        <div className="relative w-full h-full max-h-[85vh]">
+                            <Image
+                                src={activeSlides[currentSlide].image}
+                                alt={activeSlides[currentSlide].caption}
+                                fill
+                                className="object-contain"
+                                priority
+                            />
+                        </div>
+
+                        <div className="absolute bottom-8 left-0 right-0 text-center text-white/90 text-xl font-light">
+                            {activeSlides[currentSlide].caption}
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* Footer */}
+            <footer className="mt-24 pb-8 text-center border-t border-gray-200 pt-8">
+                <div className="flex flex-col items-center justify-center gap-4">
+                    <Image
+                        src="/images/goodplanr-logo.png"
+                        alt="GoodPlanr Logo"
+                        width={40}
+                        height={40}
+                        className="w-auto h-10 object-contain opacity-80"
+                    />
+                    <p className="text-sm text-gray-500">
+                        &copy; {new Date().getFullYear()} GoodPlanr. All rights reserved.
+                    </p>
+                </div>
+            </footer>
         </div>
     )
 }

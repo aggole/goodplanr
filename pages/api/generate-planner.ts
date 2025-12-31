@@ -62,13 +62,13 @@ export default async function handler(
         console.log('API Key configured:', !!process.env.ILOVEPDF_PUBLIC_KEY);
 
         let compressedBytes;
-        try {
-            compressedBytes = await compressPdfWithILovePDF(pdfBytes);
-            console.log(`PDF after compression: ${(compressedBytes.length / 1024 / 1024).toFixed(2)}MB`);
-        } catch (error) {
-            console.error('COMPRESSION ERROR:', error);
-            compressedBytes = pdfBytes;
-        }
+        // try {
+        //     compressedBytes = await compressPdfWithILovePDF(pdfBytes);
+        //     console.log(`PDF after compression: ${(compressedBytes.length / 1024 / 1024).toFixed(2)}MB`);
+        // } catch (error) {
+        //     console.error('COMPRESSION ERROR:', error);
+        compressedBytes = pdfBytes;
+        // }
         console.log('=== COMPRESSION END ===');
 
         // Build filename with year, start day, and holiday country
