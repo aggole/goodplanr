@@ -239,6 +239,7 @@ export function PlannerLayout() {
                                     fill
                                     className="object-cover"
                                     priority={index === 0}
+                                    unoptimized
                                 />
                             ) : (
                                 <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${index % 4 === 0 ? 'from-purple-400 to-blue-500' :
@@ -566,6 +567,7 @@ export function PlannerLayout() {
                                 fill
                                 className="object-contain"
                                 priority
+                                unoptimized
                             />
                         </div>
 
