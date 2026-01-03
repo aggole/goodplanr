@@ -4,6 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Image from "next/image"
 import { client, queries, urlFor } from "@/lib/sanity.client"
+import FeaturedReviews from "@/components/FeaturedReviews"
 
 // Popular countries for holiday selection - sorted alphabetically
 const holidayCountries = [
@@ -61,6 +62,7 @@ export function PlannerLayout() {
     const [redeemCode, setRedeemCode] = useState('')
     const [banners, setBanners] = useState<any[]>([])
     const [isEnlarged, setIsEnlarged] = useState(false)
+    const [reviews, setReviews] = useState<any[]>([])
 
     // Default hero banner slides (fallback)
     // Default hero banner slides (fallback)
@@ -79,6 +81,33 @@ export function PlannerLayout() {
             }
         };
         fetchBanners();
+    }, []);
+
+    // Fetch reviews from Sanity
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const data = await client.fetch(`*[_type == "review"] | order(defined(images[0]) desc, date desc) {
+                    _id,
+                    author,
+                    rating,
+                    content,
+                    date,
+                    verified,
+                    images[] {
+                        asset->{
+                            url
+                        }
+                    }
+                }`);
+                if (data && data.length > 0) {
+                    setReviews(data);
+                }
+            } catch (error) {
+                console.error("Failed to fetch reviews:", error);
+            }
+        };
+        fetchReviews();
     }, []);
 
     // Combine Sanity banners with default slides
@@ -577,6 +606,10 @@ export function PlannerLayout() {
                     </div>
                 </div>
             )}
+
+            {/* Featured Reviews */}
+            {reviews.length > 0 && <FeaturedReviews reviews={reviews} />}
+
             {/* Footer */}
             <footer className="mt-24 pb-8 text-center border-t border-gray-200 pt-8">
                 <div className="flex flex-col items-center justify-center gap-4">
