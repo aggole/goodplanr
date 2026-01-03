@@ -9,7 +9,12 @@ const nextConfig: NextConfig = {
     // Allow unoptimized images for large preview files
     unoptimized: false,
     // Add image domains if needed
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
+    ],
   },
 
   // Ensure public folder is included in build
