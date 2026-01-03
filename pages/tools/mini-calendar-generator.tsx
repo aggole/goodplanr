@@ -68,7 +68,7 @@ export default function MiniCalendarGenerator() {
     // Draw Header: "JAN 2026"
     ctx.fillStyle = STYLE.colors.title;
     ctx.textAlign = 'left';
-    ctx.fillText(`Goodplanr ${MONTHS[monthIndex]} ${year}`, STYLE.padding + 12, STYLE.padding);
+    ctx.fillText(`${MONTHS[monthIndex]} ${year}`, STYLE.padding + 12, STYLE.padding);
 
     // Draw Weekday Headers
     ctx.font = `400 ${STYLE.dayHeaderSize}px ${roboto.style.fontFamily}, sans-serif`;
@@ -183,7 +183,7 @@ export default function MiniCalendarGenerator() {
       </Head>
 
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-gray-800">Mini Calendar Generator</h1>
+        <h1 className="text-3xl font-bold mb-8 text-gray-800">Goodplanr Mini Calendar Generator</h1>
 
         {/* Controls */}
         <div className="bg-gray-50 p-6 rounded-lg mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
